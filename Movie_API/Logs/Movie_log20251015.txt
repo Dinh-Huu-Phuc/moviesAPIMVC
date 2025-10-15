@@ -271,3 +271,1201 @@ VALUES (@p0, @p1, @p2, @p3, @p4);
 2025-10-15 13:17:01.531 +07:00 [INF] Executed action Movie_API.Controllers.ImagesController.Upload (Movie_API) in 501.1076ms
 2025-10-15 13:17:01.532 +07:00 [INF] Executed endpoint 'Movie_API.Controllers.ImagesController.Upload (Movie_API)'
 2025-10-15 13:17:01.534 +07:00 [INF] Request finished HTTP/1.1 POST http://localhost:5099/api/Movie/Upload - 200 null application/json; charset=utf-8 532.2591ms
+2025-10-15 13:17:09.991 +07:00 [INF] Request starting HTTP/1.1 GET http://10.0.2.2:5099/api/Movies/get-all-movies?filterQuery=&sortBy=title&isAscending=true&pageNumber=1&pageSize=10 - null null
+2025-10-15 13:17:09.995 +07:00 [INF] Executing endpoint 'Movie_API.Controllers.MoviesController.GetAll (Movie_API)'
+2025-10-15 13:17:09.996 +07:00 [INF] Route matched with {action = "GetAll", controller = "Movies"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetAll(System.String, System.String, System.String, Boolean, Int32, Int32) on controller Movie_API.Controllers.MoviesController (Movie_API).
+2025-10-15 13:17:10.016 +07:00 [INF] Executing action method Movie_API.Controllers.MoviesController.GetAll (Movie_API) - Validation state: "Valid"
+2025-10-15 13:17:10.032 +07:00 [INF] Executed DbCommand (12ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[Title], [t].[Description], [t].[IsWatched], CASE
+    WHEN [t].[IsWatched] = CAST(1 AS bit) THEN [t].[DateWatched]
+    ELSE NULL
+END, CASE
+    WHEN [t].[IsWatched] = CAST(1 AS bit) THEN [t].[Rating]
+    ELSE NULL
+END, [t].[Genre], [t].[PosterUrl], [s].[Name], [s].[Id], [t0].[FullName], [t0].[Id], [t0].[Id0]
+FROM (
+    SELECT [m].[Id], [m].[DateWatched], [m].[Description], [m].[Genre], [m].[IsWatched], [m].[PosterUrl], [m].[Rating], [m].[StudioID], [m].[Title]
+    FROM [Movies] AS [m]
+    ORDER BY [m].[Title]
+    OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+) AS [t]
+INNER JOIN [Studios] AS [s] ON [t].[StudioID] = [s].[Id]
+LEFT JOIN (
+    SELECT [a].[FullName], [m0].[Id], [a].[Id] AS [Id0], [m0].[MovieId]
+    FROM [Movie_Actors] AS [m0]
+    INNER JOIN [Actors] AS [a] ON [m0].[ActorId] = [a].[Id]
+) AS [t0] ON [t].[Id] = [t0].[MovieId]
+ORDER BY [t].[Title], [t].[Id], [s].[Id], [t0].[Id]
+2025-10-15 13:17:10.035 +07:00 [INF] Executed action method Movie_API.Controllers.MoviesController.GetAll (Movie_API), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 17.224ms.
+2025-10-15 13:17:10.036 +07:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[Movie_API.Models.DTO.MovieWithActorAndStudioDTO, Movie_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-10-15 13:17:10.037 +07:00 [INF] Executed action Movie_API.Controllers.MoviesController.GetAll (Movie_API) in 39.7063ms
+2025-10-15 13:17:10.039 +07:00 [INF] Executed endpoint 'Movie_API.Controllers.MoviesController.GetAll (Movie_API)'
+2025-10-15 13:17:10.040 +07:00 [INF] Request finished HTTP/1.1 GET http://10.0.2.2:5099/api/Movies/get-all-movies?filterQuery=&sortBy=title&isAscending=true&pageNumber=1&pageSize=10 - 200 null application/json; charset=utf-8 49.3353ms
+2025-10-15 13:17:10.996 +07:00 [INF] Request starting HTTP/1.1 GET http://10.0.2.2:5099/api/Movie/GetAllImages - null null
+2025-10-15 13:17:10.999 +07:00 [INF] Executing endpoint 'Movie_API.Controllers.ImagesController.GetInfoAllImages (Movie_API)'
+2025-10-15 13:17:11.000 +07:00 [INF] Route matched with {action = "GetInfoAllImages", controller = "Images"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetInfoAllImages() on controller Movie_API.Controllers.ImagesController (Movie_API).
+2025-10-15 13:17:11.017 +07:00 [INF] Executing action method Movie_API.Controllers.ImagesController.GetInfoAllImages (Movie_API) - Validation state: "Valid"
+2025-10-15 13:17:11.019 +07:00 [INF] Executed action method Movie_API.Controllers.ImagesController.GetInfoAllImages (Movie_API), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 0.0533ms.
+2025-10-15 13:17:11.020 +07:00 [INF] Executing OkObjectResult, writing value of type 'System.Linq.Enumerable+SelectEnumerableIterator`2[[Movie_API.Models.Domain.Image, Movie_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[<>f__AnonymousType3`6[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int64, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], Movie_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-10-15 13:17:11.024 +07:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[FileDescription], [i].[FileExtension], [i].[FileName], [i].[FilePath], [i].[FileSizeInBytes]
+FROM [Images] AS [i]
+2025-10-15 13:17:11.026 +07:00 [INF] Executed action Movie_API.Controllers.ImagesController.GetInfoAllImages (Movie_API) in 23.5592ms
+2025-10-15 13:17:11.027 +07:00 [INF] Executed endpoint 'Movie_API.Controllers.ImagesController.GetInfoAllImages (Movie_API)'
+2025-10-15 13:17:11.028 +07:00 [INF] Request finished HTTP/1.1 GET http://10.0.2.2:5099/api/Movie/GetAllImages - 200 null application/json; charset=utf-8 31.7901ms
+2025-10-15 13:17:11.164 +07:00 [INF] Request starting HTTP/1.1 GET http://10.0.2.2:5099/uploads/5a15c29e-0f9b-43dc-b40b-911f839b20a1.mp4 - null null
+2025-10-15 13:17:11.166 +07:00 [INF] Executing endpoint 'HTTP: GET, HEAD /uploads/{*path}'
+2025-10-15 13:17:11.167 +07:00 [INF] Sending file with download name ''.
+2025-10-15 13:17:12.247 +07:00 [INF] Executed endpoint 'HTTP: GET, HEAD /uploads/{*path}'
+2025-10-15 13:17:12.248 +07:00 [INF] Request finished HTTP/1.1 GET http://10.0.2.2:5099/uploads/5a15c29e-0f9b-43dc-b40b-911f839b20a1.mp4 - 200 4331120 video/mp4 1084.128ms
+2025-10-15 13:17:13.223 +07:00 [INF] Request starting HTTP/1.1 GET http://10.0.2.2:5099/uploads/5a15c29e-0f9b-43dc-b40b-911f839b20a1.mp4 - null null
+2025-10-15 13:17:13.227 +07:00 [INF] Executing endpoint 'HTTP: GET, HEAD /uploads/{*path}'
+2025-10-15 13:17:13.228 +07:00 [INF] Sending file with download name ''.
+2025-10-15 13:17:13.335 +07:00 [INF] Executed endpoint 'HTTP: GET, HEAD /uploads/{*path}'
+2025-10-15 13:17:13.336 +07:00 [INF] Request finished HTTP/1.1 GET http://10.0.2.2:5099/uploads/5a15c29e-0f9b-43dc-b40b-911f839b20a1.mp4 - 200 4331120 video/mp4 112.8688ms
+2025-10-15 13:17:13.340 +07:00 [INF] Request starting HTTP/1.1 GET http://10.0.2.2:5099/uploads/5a15c29e-0f9b-43dc-b40b-911f839b20a1.mp4 - null null
+2025-10-15 13:17:13.341 +07:00 [INF] Executing endpoint 'HTTP: GET, HEAD /uploads/{*path}'
+2025-10-15 13:17:13.342 +07:00 [INF] Sending file with download name ''.
+2025-10-15 13:17:13.344 +07:00 [INF] Executed endpoint 'HTTP: GET, HEAD /uploads/{*path}'
+2025-10-15 13:17:13.345 +07:00 [INF] Request finished HTTP/1.1 GET http://10.0.2.2:5099/uploads/5a15c29e-0f9b-43dc-b40b-911f839b20a1.mp4 - 206 13352 video/mp4 5.2962ms
+2025-10-15 13:17:13.358 +07:00 [INF] Request starting HTTP/1.1 GET http://10.0.2.2:5099/uploads/5a15c29e-0f9b-43dc-b40b-911f839b20a1.mp4 - null null
+2025-10-15 13:17:13.360 +07:00 [INF] Executing endpoint 'HTTP: GET, HEAD /uploads/{*path}'
+2025-10-15 13:17:13.360 +07:00 [INF] Sending file with download name ''.
+2025-10-15 13:17:14.376 +07:00 [INF] Executed endpoint 'HTTP: GET, HEAD /uploads/{*path}'
+2025-10-15 13:17:14.377 +07:00 [INF] Request finished HTTP/1.1 GET http://10.0.2.2:5099/uploads/5a15c29e-0f9b-43dc-b40b-911f839b20a1.mp4 - 206 4331072 video/mp4 1019.2778ms
+2025-10-15 13:17:26.574 +07:00 [INF] Request starting HTTP/1.1 GET http://10.0.2.2:5099/api/Movie/GetAllImages - null null
+2025-10-15 13:17:26.576 +07:00 [INF] Executing endpoint 'Movie_API.Controllers.ImagesController.GetInfoAllImages (Movie_API)'
+2025-10-15 13:17:26.577 +07:00 [INF] Route matched with {action = "GetInfoAllImages", controller = "Images"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetInfoAllImages() on controller Movie_API.Controllers.ImagesController (Movie_API).
+2025-10-15 13:17:26.598 +07:00 [INF] Executing action method Movie_API.Controllers.ImagesController.GetInfoAllImages (Movie_API) - Validation state: "Valid"
+2025-10-15 13:17:26.600 +07:00 [INF] Executed action method Movie_API.Controllers.ImagesController.GetInfoAllImages (Movie_API), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 0.0416ms.
+2025-10-15 13:17:26.601 +07:00 [INF] Executing OkObjectResult, writing value of type 'System.Linq.Enumerable+SelectEnumerableIterator`2[[Movie_API.Models.Domain.Image, Movie_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[<>f__AnonymousType3`6[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int64, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], Movie_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-10-15 13:17:26.605 +07:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[FileDescription], [i].[FileExtension], [i].[FileName], [i].[FilePath], [i].[FileSizeInBytes]
+FROM [Images] AS [i]
+2025-10-15 13:17:26.607 +07:00 [INF] Executed action Movie_API.Controllers.ImagesController.GetInfoAllImages (Movie_API) in 28.2178ms
+2025-10-15 13:17:26.608 +07:00 [INF] Executed endpoint 'Movie_API.Controllers.ImagesController.GetInfoAllImages (Movie_API)'
+2025-10-15 13:17:26.609 +07:00 [INF] Request finished HTTP/1.1 GET http://10.0.2.2:5099/api/Movie/GetAllImages - 200 null application/json; charset=utf-8 35.7371ms
+2025-10-15 13:17:34.323 +07:00 [INF] Request starting HTTP/1.1 GET http://10.0.2.2:5099/api/Movie/GetAllImages - null null
+2025-10-15 13:17:34.326 +07:00 [INF] Executing endpoint 'Movie_API.Controllers.ImagesController.GetInfoAllImages (Movie_API)'
+2025-10-15 13:17:34.327 +07:00 [INF] Route matched with {action = "GetInfoAllImages", controller = "Images"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetInfoAllImages() on controller Movie_API.Controllers.ImagesController (Movie_API).
+2025-10-15 13:17:34.351 +07:00 [INF] Executing action method Movie_API.Controllers.ImagesController.GetInfoAllImages (Movie_API) - Validation state: "Valid"
+2025-10-15 13:17:34.352 +07:00 [INF] Executed action method Movie_API.Controllers.ImagesController.GetInfoAllImages (Movie_API), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 0.0347ms.
+2025-10-15 13:17:34.355 +07:00 [INF] Executing OkObjectResult, writing value of type 'System.Linq.Enumerable+SelectEnumerableIterator`2[[Movie_API.Models.Domain.Image, Movie_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[<>f__AnonymousType3`6[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int64, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], Movie_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-10-15 13:17:34.361 +07:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[FileDescription], [i].[FileExtension], [i].[FileName], [i].[FilePath], [i].[FileSizeInBytes]
+FROM [Images] AS [i]
+2025-10-15 13:17:34.363 +07:00 [INF] Executed action Movie_API.Controllers.ImagesController.GetInfoAllImages (Movie_API) in 33.9079ms
+2025-10-15 13:17:34.364 +07:00 [INF] Executed endpoint 'Movie_API.Controllers.ImagesController.GetInfoAllImages (Movie_API)'
+2025-10-15 13:17:34.365 +07:00 [INF] Request finished HTTP/1.1 GET http://10.0.2.2:5099/api/Movie/GetAllImages - 200 null application/json; charset=utf-8 42.1565ms
+2025-10-15 13:17:35.656 +07:00 [INF] Request starting HTTP/1.1 GET http://10.0.2.2:5099/uploads/d9f927d6-1834-4778-b37f-dcfce24690fa.mp4 - null null
+2025-10-15 13:17:35.659 +07:00 [INF] Executing endpoint 'HTTP: GET, HEAD /uploads/{*path}'
+2025-10-15 13:17:35.661 +07:00 [INF] Sending file with download name ''.
+2025-10-15 13:17:35.771 +07:00 [INF] Executed endpoint 'HTTP: GET, HEAD /uploads/{*path}'
+2025-10-15 13:17:35.772 +07:00 [INF] Request finished HTTP/1.1 GET http://10.0.2.2:5099/uploads/d9f927d6-1834-4778-b37f-dcfce24690fa.mp4 - 200 2658737 video/mp4 115.549ms
+2025-10-15 13:17:35.773 +07:00 [INF] Request starting HTTP/1.1 GET http://10.0.2.2:5099/uploads/d9f927d6-1834-4778-b37f-dcfce24690fa.mp4 - null null
+2025-10-15 13:17:35.776 +07:00 [INF] Executing endpoint 'HTTP: GET, HEAD /uploads/{*path}'
+2025-10-15 13:17:35.777 +07:00 [INF] Sending file with download name ''.
+2025-10-15 13:17:35.779 +07:00 [INF] Executed endpoint 'HTTP: GET, HEAD /uploads/{*path}'
+2025-10-15 13:17:35.781 +07:00 [INF] Request finished HTTP/1.1 GET http://10.0.2.2:5099/uploads/d9f927d6-1834-4778-b37f-dcfce24690fa.mp4 - 206 10980 video/mp4 8.0274ms
+2025-10-15 13:17:35.790 +07:00 [INF] Request starting HTTP/1.1 GET http://10.0.2.2:5099/uploads/d9f927d6-1834-4778-b37f-dcfce24690fa.mp4 - null null
+2025-10-15 13:17:35.792 +07:00 [INF] Executing endpoint 'HTTP: GET, HEAD /uploads/{*path}'
+2025-10-15 13:17:35.793 +07:00 [INF] Sending file with download name ''.
+2025-10-15 13:17:36.539 +07:00 [INF] Executed endpoint 'HTTP: GET, HEAD /uploads/{*path}'
+2025-10-15 13:17:36.540 +07:00 [INF] Request finished HTTP/1.1 GET http://10.0.2.2:5099/uploads/d9f927d6-1834-4778-b37f-dcfce24690fa.mp4 - 206 2658689 video/mp4 749.9153ms
+2025-10-15 14:00:46.437 +07:00 [INF] Executed DbCommand (15ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2025-10-15 14:00:46.490 +07:00 [INF] Executed DbCommand (11ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2025-10-15 14:00:46.492 +07:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2025-10-15 14:00:46.493 +07:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2025-10-15 14:00:46.512 +07:00 [INF] Executed DbCommand (8ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];
+2025-10-15 14:00:46.521 +07:00 [INF] Applying migration '20251015070037_AddThumbnailToImages'.
+2025-10-15 14:00:46.573 +07:00 [INF] Executed DbCommand (17ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE [Images] ADD [ThumbnailFileName] nvarchar(max) NULL;
+2025-10-15 14:00:46.579 +07:00 [INF] Executed DbCommand (6ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20251015070037_AddThumbnailToImages', N'8.0.15');
+2025-10-15 14:00:54.088 +07:00 [INF] User profile is available. Using 'C:\Users\Admin\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-10-15 14:00:54.393 +07:00 [INF] Now listening on: http://0.0.0.0:5099
+2025-10-15 14:00:54.457 +07:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-10-15 14:00:54.458 +07:00 [INF] Hosting environment: Development
+2025-10-15 14:00:54.459 +07:00 [INF] Content root path: I:\Movie_API\Movie_API
+2025-10-15 14:00:55.123 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5099/_framework/aspnetcore-browser-refresh.js - null null
+2025-10-15 14:00:55.141 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5099/_framework/aspnetcore-browser-refresh.js - 200 16503 application/javascript; charset=utf-8 23.7876ms
+2025-10-15 14:00:55.176 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5099/_vs/browserLink - null null
+2025-10-15 14:00:55.241 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5099/_vs/browserLink - 200 null text/javascript; charset=UTF-8 65.2974ms
+2025-10-15 14:00:55.946 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5099/swagger/v1/swagger.json - null null
+2025-10-15 14:00:55.987 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5099/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 40.9679ms
+2025-10-15 14:02:05.045 +07:00 [INF] Request starting HTTP/1.1 GET http://10.0.2.2:5099/api/Movies/get-all-movies?filterQuery=&sortBy=title&isAscending=true&pageNumber=1&pageSize=10 - null null
+2025-10-15 14:02:06.442 +07:00 [INF] Executing endpoint 'Movie_API.Controllers.MoviesController.GetAll (Movie_API)'
+2025-10-15 14:02:06.467 +07:00 [INF] Route matched with {action = "GetAll", controller = "Movies"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetAll(System.String, System.String, System.String, Boolean, Int32, Int32) on controller Movie_API.Controllers.MoviesController (Movie_API).
+2025-10-15 14:02:06.673 +07:00 [INF] Executing action method Movie_API.Controllers.MoviesController.GetAll (Movie_API) - Validation state: "Valid"
+2025-10-15 14:02:07.915 +07:00 [INF] Executed DbCommand (102ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[Title], [t].[Description], [t].[IsWatched], CASE
+    WHEN [t].[IsWatched] = CAST(1 AS bit) THEN [t].[DateWatched]
+    ELSE NULL
+END, CASE
+    WHEN [t].[IsWatched] = CAST(1 AS bit) THEN [t].[Rating]
+    ELSE NULL
+END, [t].[Genre], [t].[PosterUrl], [s].[Name], [s].[Id], [t0].[FullName], [t0].[Id], [t0].[Id0]
+FROM (
+    SELECT [m].[Id], [m].[DateWatched], [m].[Description], [m].[Genre], [m].[IsWatched], [m].[PosterUrl], [m].[Rating], [m].[StudioID], [m].[Title]
+    FROM [Movies] AS [m]
+    ORDER BY [m].[Title]
+    OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+) AS [t]
+INNER JOIN [Studios] AS [s] ON [t].[StudioID] = [s].[Id]
+LEFT JOIN (
+    SELECT [a].[FullName], [m0].[Id], [a].[Id] AS [Id0], [m0].[MovieId]
+    FROM [Movie_Actors] AS [m0]
+    INNER JOIN [Actors] AS [a] ON [m0].[ActorId] = [a].[Id]
+) AS [t0] ON [t].[Id] = [t0].[MovieId]
+ORDER BY [t].[Title], [t].[Id], [s].[Id], [t0].[Id]
+2025-10-15 14:02:07.943 +07:00 [INF] Executed action method Movie_API.Controllers.MoviesController.GetAll (Movie_API), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 1264.3089ms.
+2025-10-15 14:02:07.950 +07:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[Movie_API.Models.DTO.MovieWithActorAndStudioDTO, Movie_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-10-15 14:02:07.975 +07:00 [INF] Executed action Movie_API.Controllers.MoviesController.GetAll (Movie_API) in 1503.3469ms
+2025-10-15 14:02:07.976 +07:00 [INF] Executed endpoint 'Movie_API.Controllers.MoviesController.GetAll (Movie_API)'
+2025-10-15 14:02:07.983 +07:00 [INF] Request finished HTTP/1.1 GET http://10.0.2.2:5099/api/Movies/get-all-movies?filterQuery=&sortBy=title&isAscending=true&pageNumber=1&pageSize=10 - 200 null application/json; charset=utf-8 2937.8937ms
+2025-10-15 14:02:13.116 +07:00 [INF] Request starting HTTP/1.1 GET http://10.0.2.2:5099/api/Movie/GetAllImages - null null
+2025-10-15 14:02:13.121 +07:00 [INF] Executing endpoint 'Movie_API.Controllers.ImagesController.GetInfoAllImages (Movie_API)'
+2025-10-15 14:02:13.125 +07:00 [INF] Route matched with {action = "GetInfoAllImages", controller = "Images"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetInfoAllImages() on controller Movie_API.Controllers.ImagesController (Movie_API).
+2025-10-15 14:02:13.141 +07:00 [INF] Executing action method Movie_API.Controllers.ImagesController.GetInfoAllImages (Movie_API) - Validation state: "Valid"
+2025-10-15 14:02:13.144 +07:00 [INF] Executed action method Movie_API.Controllers.ImagesController.GetInfoAllImages (Movie_API), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 1.627ms.
+2025-10-15 14:02:13.146 +07:00 [INF] Executing OkObjectResult, writing value of type 'System.Linq.Enumerable+SelectEnumerableIterator`2[[Movie_API.Models.Domain.Image, Movie_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[<>f__AnonymousType3`7[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int64, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], Movie_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-10-15 14:02:13.204 +07:00 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[FileDescription], [i].[FileExtension], [i].[FileName], [i].[FilePath], [i].[FileSizeInBytes], [i].[ThumbnailFileName]
+FROM [Images] AS [i]
+2025-10-15 14:02:13.271 +07:00 [INF] Executed action Movie_API.Controllers.ImagesController.GetInfoAllImages (Movie_API) in 144.5072ms
+2025-10-15 14:02:13.274 +07:00 [INF] Executed endpoint 'Movie_API.Controllers.ImagesController.GetInfoAllImages (Movie_API)'
+2025-10-15 14:02:13.275 +07:00 [INF] Request finished HTTP/1.1 GET http://10.0.2.2:5099/api/Movie/GetAllImages - 200 null application/json; charset=utf-8 158.7961ms
+2025-10-15 14:02:15.147 +07:00 [INF] Request starting HTTP/1.1 GET http://10.0.2.2:5099/uploads/5a15c29e-0f9b-43dc-b40b-911f839b20a1.mp4 - null null
+2025-10-15 14:02:15.152 +07:00 [INF] Executing endpoint 'HTTP: GET, HEAD /uploads/{*path}'
+2025-10-15 14:02:15.170 +07:00 [INF] Sending file with download name ''.
+2025-10-15 14:02:15.439 +07:00 [INF] Request starting HTTP/1.1 GET http://10.0.2.2:5099/uploads/5a15c29e-0f9b-43dc-b40b-911f839b20a1.mp4 - null null
+2025-10-15 14:02:15.441 +07:00 [INF] Executing endpoint 'HTTP: GET, HEAD /uploads/{*path}'
+2025-10-15 14:02:15.442 +07:00 [INF] Sending file with download name ''.
+2025-10-15 14:02:15.444 +07:00 [INF] Executed endpoint 'HTTP: GET, HEAD /uploads/{*path}'
+2025-10-15 14:02:15.447 +07:00 [INF] Request finished HTTP/1.1 GET http://10.0.2.2:5099/uploads/5a15c29e-0f9b-43dc-b40b-911f839b20a1.mp4 - 200 4331120 video/mp4 300.133ms
+2025-10-15 14:02:15.447 +07:00 [INF] Executed endpoint 'HTTP: GET, HEAD /uploads/{*path}'
+2025-10-15 14:02:15.450 +07:00 [INF] Request finished HTTP/1.1 GET http://10.0.2.2:5099/uploads/5a15c29e-0f9b-43dc-b40b-911f839b20a1.mp4 - 206 13352 video/mp4 10.9083ms
+2025-10-15 14:02:15.486 +07:00 [INF] Request starting HTTP/1.1 GET http://10.0.2.2:5099/uploads/5a15c29e-0f9b-43dc-b40b-911f839b20a1.mp4 - null null
+2025-10-15 14:02:15.488 +07:00 [INF] Executing endpoint 'HTTP: GET, HEAD /uploads/{*path}'
+2025-10-15 14:02:15.489 +07:00 [INF] Sending file with download name ''.
+2025-10-15 14:02:16.747 +07:00 [INF] Executed endpoint 'HTTP: GET, HEAD /uploads/{*path}'
+2025-10-15 14:02:16.748 +07:00 [INF] Request finished HTTP/1.1 GET http://10.0.2.2:5099/uploads/5a15c29e-0f9b-43dc-b40b-911f839b20a1.mp4 - 206 4331072 video/mp4 1262.2232ms
+2025-10-15 14:04:29.425 +07:00 [INF] User profile is available. Using 'C:\Users\Admin\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-10-15 14:04:29.593 +07:00 [INF] Now listening on: http://0.0.0.0:5099
+2025-10-15 14:04:29.637 +07:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-10-15 14:04:29.639 +07:00 [INF] Hosting environment: Development
+2025-10-15 14:04:29.639 +07:00 [INF] Content root path: I:\Movie_API\Movie_API
+2025-10-15 14:04:30.949 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5099/_framework/aspnetcore-browser-refresh.js - null null
+2025-10-15 14:04:30.966 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5099/_framework/aspnetcore-browser-refresh.js - 200 16503 application/javascript; charset=utf-8 20.0408ms
+2025-10-15 14:04:31.164 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5099/_vs/browserLink - null null
+2025-10-15 14:04:31.224 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5099/_vs/browserLink - 200 null text/javascript; charset=UTF-8 59.9651ms
+2025-10-15 14:04:32.188 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5099/swagger/v1/swagger.json - null null
+2025-10-15 14:04:32.230 +07:00 [ERR] An unhandled exception has occurred while executing the request.
+Swashbuckle.AspNetCore.SwaggerGen.SwaggerGeneratorException: Failed to generate Operation for action - Movie_API.Controllers.ImagesController.UploadThumbnail (Movie_API). See inner exception
+ ---> Swashbuckle.AspNetCore.SwaggerGen.SwaggerGeneratorException: Error reading parameter(s) for action Movie_API.Controllers.ImagesController.UploadThumbnail (Movie_API) as [FromForm] attribute used with IFormFile. Please refer to https://github.com/domaindrivendev/Swashbuckle.AspNetCore/tree/master/docs/configure-and-customize-swaggergen.md#handle-forms-and-file-uploads for more information
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateParametersAsync(ApiDescription apiDescription, SchemaRepository schemaRepository, Func`3 parameterGenerator)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateParametersAsync(ApiDescription apiDescription, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateOperationAsync(OpenApiDocument document, ApiDescription apiDescription, SchemaRepository schemaRepository, Func`3 parametersGenerator, Func`3 bodyGenerator, Func`3 applyFilters)
+   --- End of inner exception stack trace ---
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateOperationAsync(OpenApiDocument document, ApiDescription apiDescription, SchemaRepository schemaRepository, Func`3 parametersGenerator, Func`3 bodyGenerator, Func`3 applyFilters)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateOperationAsync(OpenApiDocument document, ApiDescription apiDescription, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateOperationsAsync(OpenApiDocument document, IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GeneratePathsAsync(OpenApiDocument document, IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository, Func`4 operationsGenerator)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GeneratePathsAsync(OpenApiDocument document, IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GetSwaggerAsync(String documentName, String host, String basePath)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2025-10-15 14:04:32.239 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5099/swagger/v1/swagger.json - 500 null text/plain; charset=utf-8 50.7077ms
+2025-10-15 14:05:06.186 +07:00 [INF] User profile is available. Using 'C:\Users\Admin\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-10-15 14:05:06.351 +07:00 [INF] Now listening on: http://0.0.0.0:5099
+2025-10-15 14:05:06.400 +07:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-10-15 14:05:06.402 +07:00 [INF] Hosting environment: Development
+2025-10-15 14:05:06.403 +07:00 [INF] Content root path: I:\Movie_API\Movie_API
+2025-10-15 14:05:07.239 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5099/_framework/aspnetcore-browser-refresh.js - null null
+2025-10-15 14:05:07.252 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5099/_framework/aspnetcore-browser-refresh.js - 200 16503 application/javascript; charset=utf-8 16.4014ms
+2025-10-15 14:05:07.357 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5099/_vs/browserLink - null null
+2025-10-15 14:05:07.411 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5099/_vs/browserLink - 200 null text/javascript; charset=UTF-8 53.2429ms
+2025-10-15 14:05:08.133 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5099/swagger/v1/swagger.json - null null
+2025-10-15 14:05:08.170 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5099/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 37.3477ms
+2025-10-15 14:10:56.335 +07:00 [INF] User profile is available. Using 'C:\Users\Admin\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-10-15 14:10:56.520 +07:00 [INF] Now listening on: http://0.0.0.0:5099
+2025-10-15 14:10:56.568 +07:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-10-15 14:10:56.569 +07:00 [INF] Hosting environment: Development
+2025-10-15 14:10:56.570 +07:00 [INF] Content root path: I:\Movie_API\Movie_API
+2025-10-15 14:10:57.466 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5099/_framework/aspnetcore-browser-refresh.js - null null
+2025-10-15 14:10:57.481 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5099/_framework/aspnetcore-browser-refresh.js - 200 16503 application/javascript; charset=utf-8 21.5009ms
+2025-10-15 14:10:57.708 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5099/_vs/browserLink - null null
+2025-10-15 14:10:57.772 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5099/_vs/browserLink - 200 null text/javascript; charset=UTF-8 64.3479ms
+2025-10-15 14:10:58.715 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5099/swagger/v1/swagger.json - null null
+2025-10-15 14:10:58.753 +07:00 [ERR] An unhandled exception has occurred while executing the request.
+Swashbuckle.AspNetCore.SwaggerGen.SwaggerGeneratorException: Failed to generate Operation for action - Movie_API.Controllers.ImagesController.UploadThumbnail (Movie_API). See inner exception
+ ---> Swashbuckle.AspNetCore.SwaggerGen.SwaggerGeneratorException: Error reading parameter(s) for action Movie_API.Controllers.ImagesController.UploadThumbnail (Movie_API) as [FromForm] attribute used with IFormFile. Please refer to https://github.com/domaindrivendev/Swashbuckle.AspNetCore/tree/master/docs/configure-and-customize-swaggergen.md#handle-forms-and-file-uploads for more information
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateParametersAsync(ApiDescription apiDescription, SchemaRepository schemaRepository, Func`3 parameterGenerator)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateParametersAsync(ApiDescription apiDescription, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateOperationAsync(OpenApiDocument document, ApiDescription apiDescription, SchemaRepository schemaRepository, Func`3 parametersGenerator, Func`3 bodyGenerator, Func`3 applyFilters)
+   --- End of inner exception stack trace ---
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateOperationAsync(OpenApiDocument document, ApiDescription apiDescription, SchemaRepository schemaRepository, Func`3 parametersGenerator, Func`3 bodyGenerator, Func`3 applyFilters)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateOperationAsync(OpenApiDocument document, ApiDescription apiDescription, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateOperationsAsync(OpenApiDocument document, IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GeneratePathsAsync(OpenApiDocument document, IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository, Func`4 operationsGenerator)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GeneratePathsAsync(OpenApiDocument document, IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GetSwaggerAsync(String documentName, String host, String basePath)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2025-10-15 14:10:58.760 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5099/swagger/v1/swagger.json - 500 null text/plain; charset=utf-8 44.596ms
+2025-10-15 14:21:03.931 +07:00 [INF] User profile is available. Using 'C:\Users\Admin\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-10-15 14:21:04.130 +07:00 [INF] Now listening on: http://0.0.0.0:5099
+2025-10-15 14:21:04.206 +07:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-10-15 14:21:04.209 +07:00 [INF] Hosting environment: Development
+2025-10-15 14:21:04.210 +07:00 [INF] Content root path: I:\Movie_API\Movie_API
+2025-10-15 14:21:04.941 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5099/_framework/aspnetcore-browser-refresh.js - null null
+2025-10-15 14:21:04.957 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5099/_framework/aspnetcore-browser-refresh.js - 200 16503 application/javascript; charset=utf-8 20.4689ms
+2025-10-15 14:21:05.229 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5099/_vs/browserLink - null null
+2025-10-15 14:21:05.294 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5099/_vs/browserLink - 200 null text/javascript; charset=UTF-8 64.7291ms
+2025-10-15 14:21:06.302 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5099/swagger/v1/swagger.json - null null
+2025-10-15 14:21:06.341 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5099/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 38.751ms
+2025-10-15 14:21:26.866 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5099/api/Movie/GetAllImages - null null
+2025-10-15 14:21:26.959 +07:00 [INF] Executing endpoint 'Movie_API.Controllers.ImagesController.GetInfoAllImages (Movie_API)'
+2025-10-15 14:21:26.967 +07:00 [INF] Route matched with {action = "GetInfoAllImages", controller = "Images"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetInfoAllImages() on controller Movie_API.Controllers.ImagesController (Movie_API).
+2025-10-15 14:21:27.113 +07:00 [INF] Executing action method Movie_API.Controllers.ImagesController.GetInfoAllImages (Movie_API) - Validation state: "Valid"
+2025-10-15 14:21:27.119 +07:00 [INF] Executed action method Movie_API.Controllers.ImagesController.GetInfoAllImages (Movie_API), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 0.6821ms.
+2025-10-15 14:21:27.125 +07:00 [INF] Executing OkObjectResult, writing value of type 'System.Linq.Enumerable+SelectEnumerableIterator`2[[Movie_API.Models.Domain.Image, Movie_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[<>f__AnonymousType3`7[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int64, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], Movie_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-10-15 14:21:27.989 +07:00 [INF] Executed DbCommand (23ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[FileDescription], [i].[FileExtension], [i].[FileName], [i].[FilePath], [i].[FileSizeInBytes], [i].[ThumbnailFileName]
+FROM [Images] AS [i]
+2025-10-15 14:21:28.043 +07:00 [INF] Executed action Movie_API.Controllers.ImagesController.GetInfoAllImages (Movie_API) in 1072.1856ms
+2025-10-15 14:21:28.046 +07:00 [INF] Executed endpoint 'Movie_API.Controllers.ImagesController.GetInfoAllImages (Movie_API)'
+2025-10-15 14:21:28.053 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5099/api/Movie/GetAllImages - 200 null application/json; charset=utf-8 1188.1826ms
+2025-10-15 14:21:52.850 +07:00 [INF] Request starting HTTP/1.1 POST http://localhost:5099/api/Movie/5/thumbnail - multipart/form-data; boundary=----WebKitFormBoundary3B0GiafTKdp6JEiB 183798
+2025-10-15 14:21:52.858 +07:00 [INF] CORS policy execution successful.
+2025-10-15 14:21:52.861 +07:00 [INF] Executing endpoint 'Movie_API.Controllers.ImagesController.UploadThumbnail (Movie_API)'
+2025-10-15 14:21:52.872 +07:00 [INF] Route matched with {action = "UploadThumbnail", controller = "Images"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] UploadThumbnail(Int32, Movie_API.Models.DTO.ThumbnailUploadRequestDTO) on controller Movie_API.Controllers.ImagesController (Movie_API).
+2025-10-15 14:21:52.983 +07:00 [INF] Executing action method Movie_API.Controllers.ImagesController.UploadThumbnail (Movie_API) - Validation state: "Valid"
+2025-10-15 14:21:53.080 +07:00 [INF] Executed DbCommand (19ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [i].[Id], [i].[FileDescription], [i].[FileExtension], [i].[FileName], [i].[FilePath], [i].[FileSizeInBytes], [i].[ThumbnailFileName]
+FROM [Images] AS [i]
+WHERE [i].[Id] = @__id_0
+2025-10-15 14:21:53.151 +07:00 [INF] Executed DbCommand (3ms) [Parameters=[@p6='?' (DbType = Int32), @p0='?' (Size = 4000), @p1='?' (Size = 4000), @p2='?' (Size = 4000), @p3='?' (Size = 4000), @p4='?' (DbType = Int64), @p5='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Images] SET [FileDescription] = @p0, [FileExtension] = @p1, [FileName] = @p2, [FilePath] = @p3, [FileSizeInBytes] = @p4, [ThumbnailFileName] = @p5
+OUTPUT 1
+WHERE [Id] = @p6;
+2025-10-15 14:21:53.161 +07:00 [INF] Executed action method Movie_API.Controllers.ImagesController.UploadThumbnail (Movie_API), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 177.6555ms.
+2025-10-15 14:21:53.164 +07:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType5`3[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-10-15 14:21:53.169 +07:00 [INF] Executed action Movie_API.Controllers.ImagesController.UploadThumbnail (Movie_API) in 295.4411ms
+2025-10-15 14:21:53.171 +07:00 [INF] Executed endpoint 'Movie_API.Controllers.ImagesController.UploadThumbnail (Movie_API)'
+2025-10-15 14:21:53.174 +07:00 [INF] Request finished HTTP/1.1 POST http://localhost:5099/api/Movie/5/thumbnail - 200 null application/json; charset=utf-8 323.6532ms
+2025-10-15 14:22:28.175 +07:00 [INF] Request starting HTTP/1.1 GET http://10.0.2.2:5099/api/Movies/get-all-movies?filterQuery=&sortBy=title&isAscending=true&pageNumber=1&pageSize=10 - null null
+2025-10-15 14:22:28.182 +07:00 [INF] Executing endpoint 'Movie_API.Controllers.MoviesController.GetAll (Movie_API)'
+2025-10-15 14:22:28.186 +07:00 [INF] Route matched with {action = "GetAll", controller = "Movies"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetAll(System.String, System.String, System.String, Boolean, Int32, Int32) on controller Movie_API.Controllers.MoviesController (Movie_API).
+2025-10-15 14:22:28.215 +07:00 [INF] Executing action method Movie_API.Controllers.MoviesController.GetAll (Movie_API) - Validation state: "Valid"
+2025-10-15 14:22:28.381 +07:00 [INF] Executed DbCommand (13ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[Title], [t].[Description], [t].[IsWatched], CASE
+    WHEN [t].[IsWatched] = CAST(1 AS bit) THEN [t].[DateWatched]
+    ELSE NULL
+END, CASE
+    WHEN [t].[IsWatched] = CAST(1 AS bit) THEN [t].[Rating]
+    ELSE NULL
+END, [t].[Genre], [t].[PosterUrl], [s].[Name], [s].[Id], [t0].[FullName], [t0].[Id], [t0].[Id0]
+FROM (
+    SELECT [m].[Id], [m].[DateWatched], [m].[Description], [m].[Genre], [m].[IsWatched], [m].[PosterUrl], [m].[Rating], [m].[StudioID], [m].[Title]
+    FROM [Movies] AS [m]
+    ORDER BY [m].[Title]
+    OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+) AS [t]
+INNER JOIN [Studios] AS [s] ON [t].[StudioID] = [s].[Id]
+LEFT JOIN (
+    SELECT [a].[FullName], [m0].[Id], [a].[Id] AS [Id0], [m0].[MovieId]
+    FROM [Movie_Actors] AS [m0]
+    INNER JOIN [Actors] AS [a] ON [m0].[ActorId] = [a].[Id]
+) AS [t0] ON [t].[Id] = [t0].[MovieId]
+ORDER BY [t].[Title], [t].[Id], [s].[Id], [t0].[Id]
+2025-10-15 14:22:28.386 +07:00 [INF] Executed action method Movie_API.Controllers.MoviesController.GetAll (Movie_API), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 168.7793ms.
+2025-10-15 14:22:28.388 +07:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[Movie_API.Models.DTO.MovieWithActorAndStudioDTO, Movie_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-10-15 14:22:28.402 +07:00 [INF] Executed action Movie_API.Controllers.MoviesController.GetAll (Movie_API) in 214.4426ms
+2025-10-15 14:22:28.403 +07:00 [INF] Executed endpoint 'Movie_API.Controllers.MoviesController.GetAll (Movie_API)'
+2025-10-15 14:22:28.404 +07:00 [INF] Request finished HTTP/1.1 GET http://10.0.2.2:5099/api/Movies/get-all-movies?filterQuery=&sortBy=title&isAscending=true&pageNumber=1&pageSize=10 - 200 null application/json; charset=utf-8 228.876ms
+2025-10-15 14:22:51.782 +07:00 [INF] Request starting HTTP/1.1 GET http://10.0.2.2:5099/api/Movie/GetAllImages - null null
+2025-10-15 14:22:51.785 +07:00 [INF] Executing endpoint 'Movie_API.Controllers.ImagesController.GetInfoAllImages (Movie_API)'
+2025-10-15 14:22:51.787 +07:00 [INF] Route matched with {action = "GetInfoAllImages", controller = "Images"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetInfoAllImages() on controller Movie_API.Controllers.ImagesController (Movie_API).
+2025-10-15 14:22:51.807 +07:00 [INF] Executing action method Movie_API.Controllers.ImagesController.GetInfoAllImages (Movie_API) - Validation state: "Valid"
+2025-10-15 14:22:51.808 +07:00 [INF] Executed action method Movie_API.Controllers.ImagesController.GetInfoAllImages (Movie_API), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 0.0906ms.
+2025-10-15 14:22:51.810 +07:00 [INF] Executing OkObjectResult, writing value of type 'System.Linq.Enumerable+SelectEnumerableIterator`2[[Movie_API.Models.Domain.Image, Movie_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[<>f__AnonymousType3`7[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int64, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], Movie_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-10-15 14:22:51.815 +07:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[FileDescription], [i].[FileExtension], [i].[FileName], [i].[FilePath], [i].[FileSizeInBytes], [i].[ThumbnailFileName]
+FROM [Images] AS [i]
+2025-10-15 14:22:51.817 +07:00 [INF] Executed action Movie_API.Controllers.ImagesController.GetInfoAllImages (Movie_API) in 27.4631ms
+2025-10-15 14:22:51.819 +07:00 [INF] Executed endpoint 'Movie_API.Controllers.ImagesController.GetInfoAllImages (Movie_API)'
+2025-10-15 14:22:51.820 +07:00 [INF] Request finished HTTP/1.1 GET http://10.0.2.2:5099/api/Movie/GetAllImages - 200 null application/json; charset=utf-8 37.5437ms
+2025-10-15 14:22:51.994 +07:00 [INF] Request starting HTTP/1.1 GET http://10.0.2.2:5099/uploads/image1_bb64f35a-d714-4028-8cce-f2da54774e69.jpg - null null
+2025-10-15 14:22:51.996 +07:00 [INF] Executing endpoint 'HTTP: GET, HEAD /uploads/{*path}'
+2025-10-15 14:22:52.006 +07:00 [INF] Sending file with download name ''.
+2025-10-15 14:22:52.021 +07:00 [INF] Executed endpoint 'HTTP: GET, HEAD /uploads/{*path}'
+2025-10-15 14:22:52.022 +07:00 [INF] Request finished HTTP/1.1 GET http://10.0.2.2:5099/uploads/image1_bb64f35a-d714-4028-8cce-f2da54774e69.jpg - 200 183614 image/jpeg 27.749ms
+2025-10-15 14:26:59.562 +07:00 [INF] Request starting HTTP/1.1 GET http://10.0.2.2:5099/uploads/d9f927d6-1834-4778-b37f-dcfce24690fa.mp4 - null null
+2025-10-15 14:26:59.565 +07:00 [INF] Executing endpoint 'HTTP: GET, HEAD /uploads/{*path}'
+2025-10-15 14:26:59.566 +07:00 [INF] Sending file with download name ''.
+2025-10-15 14:26:59.802 +07:00 [INF] Executed endpoint 'HTTP: GET, HEAD /uploads/{*path}'
+2025-10-15 14:26:59.803 +07:00 [INF] Request finished HTTP/1.1 GET http://10.0.2.2:5099/uploads/d9f927d6-1834-4778-b37f-dcfce24690fa.mp4 - 200 2658737 video/mp4 243.5113ms
+2025-10-15 14:26:59.811 +07:00 [INF] Request starting HTTP/1.1 GET http://10.0.2.2:5099/uploads/d9f927d6-1834-4778-b37f-dcfce24690fa.mp4 - null null
+2025-10-15 14:26:59.814 +07:00 [INF] Executing endpoint 'HTTP: GET, HEAD /uploads/{*path}'
+2025-10-15 14:26:59.815 +07:00 [INF] Sending file with download name ''.
+2025-10-15 14:26:59.819 +07:00 [INF] Executed endpoint 'HTTP: GET, HEAD /uploads/{*path}'
+2025-10-15 14:26:59.820 +07:00 [INF] Request finished HTTP/1.1 GET http://10.0.2.2:5099/uploads/d9f927d6-1834-4778-b37f-dcfce24690fa.mp4 - 206 10980 video/mp4 8.5804ms
+2025-10-15 14:26:59.857 +07:00 [INF] Request starting HTTP/1.1 GET http://10.0.2.2:5099/uploads/d9f927d6-1834-4778-b37f-dcfce24690fa.mp4 - null null
+2025-10-15 14:26:59.859 +07:00 [INF] Executing endpoint 'HTTP: GET, HEAD /uploads/{*path}'
+2025-10-15 14:26:59.860 +07:00 [INF] Sending file with download name ''.
+2025-10-15 14:27:00.921 +07:00 [INF] Executed endpoint 'HTTP: GET, HEAD /uploads/{*path}'
+2025-10-15 14:27:00.922 +07:00 [INF] Request finished HTTP/1.1 GET http://10.0.2.2:5099/uploads/d9f927d6-1834-4778-b37f-dcfce24690fa.mp4 - 206 2658689 video/mp4 1064.9405ms
+2025-10-15 14:27:04.030 +07:00 [INF] Request starting HTTP/1.1 GET http://10.0.2.2:5099/uploads/4c0458d2-48d9-40b1-aa24-d93db9d309ca.mp4 - null null
+2025-10-15 14:27:04.034 +07:00 [INF] Executing endpoint 'HTTP: GET, HEAD /uploads/{*path}'
+2025-10-15 14:27:04.037 +07:00 [INF] Sending file with download name ''.
+2025-10-15 14:27:04.148 +07:00 [INF] Executed endpoint 'HTTP: GET, HEAD /uploads/{*path}'
+2025-10-15 14:27:04.149 +07:00 [INF] Request finished HTTP/1.1 GET http://10.0.2.2:5099/uploads/4c0458d2-48d9-40b1-aa24-d93db9d309ca.mp4 - 200 1150439 video/mp4 118.6085ms
+2025-10-15 14:27:04.152 +07:00 [INF] Request starting HTTP/1.1 GET http://10.0.2.2:5099/uploads/4c0458d2-48d9-40b1-aa24-d93db9d309ca.mp4 - null null
+2025-10-15 14:27:04.153 +07:00 [INF] Executing endpoint 'HTTP: GET, HEAD /uploads/{*path}'
+2025-10-15 14:27:04.154 +07:00 [INF] Sending file with download name ''.
+2025-10-15 14:27:04.156 +07:00 [INF] Executed endpoint 'HTTP: GET, HEAD /uploads/{*path}'
+2025-10-15 14:27:04.157 +07:00 [INF] Request finished HTTP/1.1 GET http://10.0.2.2:5099/uploads/4c0458d2-48d9-40b1-aa24-d93db9d309ca.mp4 - 206 3167 video/mp4 5.7685ms
+2025-10-15 14:27:04.162 +07:00 [INF] Request starting HTTP/1.1 GET http://10.0.2.2:5099/uploads/4c0458d2-48d9-40b1-aa24-d93db9d309ca.mp4 - null null
+2025-10-15 14:27:04.164 +07:00 [INF] Executing endpoint 'HTTP: GET, HEAD /uploads/{*path}'
+2025-10-15 14:27:04.165 +07:00 [INF] Sending file with download name ''.
+2025-10-15 14:27:04.619 +07:00 [INF] Executed endpoint 'HTTP: GET, HEAD /uploads/{*path}'
+2025-10-15 14:27:04.620 +07:00 [INF] Request finished HTTP/1.1 GET http://10.0.2.2:5099/uploads/4c0458d2-48d9-40b1-aa24-d93db9d309ca.mp4 - 206 1150403 video/mp4 458.4406ms
+2025-10-15 14:27:06.612 +07:00 [INF] Request starting HTTP/1.1 GET http://10.0.2.2:5099/uploads/5a15c29e-0f9b-43dc-b40b-911f839b20a1.mp4 - null null
+2025-10-15 14:27:06.614 +07:00 [INF] Executing endpoint 'HTTP: GET, HEAD /uploads/{*path}'
+2025-10-15 14:27:06.616 +07:00 [INF] Sending file with download name ''.
+2025-10-15 14:27:06.727 +07:00 [INF] Executed endpoint 'HTTP: GET, HEAD /uploads/{*path}'
+2025-10-15 14:27:06.728 +07:00 [INF] Request finished HTTP/1.1 GET http://10.0.2.2:5099/uploads/5a15c29e-0f9b-43dc-b40b-911f839b20a1.mp4 - 200 4331120 video/mp4 116.3015ms
+2025-10-15 14:27:06.731 +07:00 [INF] Request starting HTTP/1.1 GET http://10.0.2.2:5099/uploads/5a15c29e-0f9b-43dc-b40b-911f839b20a1.mp4 - null null
+2025-10-15 14:27:06.733 +07:00 [INF] Executing endpoint 'HTTP: GET, HEAD /uploads/{*path}'
+2025-10-15 14:27:06.734 +07:00 [INF] Sending file with download name ''.
+2025-10-15 14:27:06.735 +07:00 [INF] Executed endpoint 'HTTP: GET, HEAD /uploads/{*path}'
+2025-10-15 14:27:06.736 +07:00 [INF] Request finished HTTP/1.1 GET http://10.0.2.2:5099/uploads/5a15c29e-0f9b-43dc-b40b-911f839b20a1.mp4 - 206 13352 video/mp4 5.1097ms
+2025-10-15 14:27:06.753 +07:00 [INF] Request starting HTTP/1.1 GET http://10.0.2.2:5099/uploads/5a15c29e-0f9b-43dc-b40b-911f839b20a1.mp4 - null null
+2025-10-15 14:27:06.755 +07:00 [INF] Executing endpoint 'HTTP: GET, HEAD /uploads/{*path}'
+2025-10-15 14:27:06.756 +07:00 [INF] Sending file with download name ''.
+2025-10-15 14:27:07.949 +07:00 [INF] Executed endpoint 'HTTP: GET, HEAD /uploads/{*path}'
+2025-10-15 14:27:07.950 +07:00 [INF] Request finished HTTP/1.1 GET http://10.0.2.2:5099/uploads/5a15c29e-0f9b-43dc-b40b-911f839b20a1.mp4 - 206 4331072 video/mp4 1196.9749ms
+2025-10-15 14:27:46.223 +07:00 [INF] Request starting HTTP/1.1 POST http://localhost:5099/api/Movie/6/thumbnail - multipart/form-data; boundary=----WebKitFormBoundary08AWpA7fKErMOagI 166320
+2025-10-15 14:27:46.234 +07:00 [INF] CORS policy execution successful.
+2025-10-15 14:27:46.236 +07:00 [INF] Executing endpoint 'Movie_API.Controllers.ImagesController.UploadThumbnail (Movie_API)'
+2025-10-15 14:27:46.237 +07:00 [INF] Route matched with {action = "UploadThumbnail", controller = "Images"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] UploadThumbnail(Int32, Movie_API.Models.DTO.ThumbnailUploadRequestDTO) on controller Movie_API.Controllers.ImagesController (Movie_API).
+2025-10-15 14:27:46.261 +07:00 [INF] Executing action method Movie_API.Controllers.ImagesController.UploadThumbnail (Movie_API) - Validation state: "Valid"
+2025-10-15 14:27:46.266 +07:00 [INF] Executed DbCommand (2ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [i].[Id], [i].[FileDescription], [i].[FileExtension], [i].[FileName], [i].[FilePath], [i].[FileSizeInBytes], [i].[ThumbnailFileName]
+FROM [Images] AS [i]
+WHERE [i].[Id] = @__id_0
+2025-10-15 14:27:46.280 +07:00 [INF] Executed DbCommand (3ms) [Parameters=[@p6='?' (DbType = Int32), @p0='?' (Size = 4000), @p1='?' (Size = 4000), @p2='?' (Size = 4000), @p3='?' (Size = 4000), @p4='?' (DbType = Int64), @p5='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Images] SET [FileDescription] = @p0, [FileExtension] = @p1, [FileName] = @p2, [FilePath] = @p3, [FileSizeInBytes] = @p4, [ThumbnailFileName] = @p5
+OUTPUT 1
+WHERE [Id] = @p6;
+2025-10-15 14:27:46.282 +07:00 [INF] Executed action method Movie_API.Controllers.ImagesController.UploadThumbnail (Movie_API), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 19.7965ms.
+2025-10-15 14:27:46.283 +07:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType5`3[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-10-15 14:27:46.284 +07:00 [INF] Executed action Movie_API.Controllers.ImagesController.UploadThumbnail (Movie_API) in 45.6771ms
+2025-10-15 14:27:46.285 +07:00 [INF] Executed endpoint 'Movie_API.Controllers.ImagesController.UploadThumbnail (Movie_API)'
+2025-10-15 14:27:46.287 +07:00 [INF] Request finished HTTP/1.1 POST http://localhost:5099/api/Movie/6/thumbnail - 200 null application/json; charset=utf-8 63.7127ms
+2025-10-15 14:27:54.070 +07:00 [INF] Request starting HTTP/1.1 GET http://10.0.2.2:5099/api/Movies/get-all-movies?filterQuery=&sortBy=title&isAscending=true&pageNumber=1&pageSize=10 - null null
+2025-10-15 14:27:54.074 +07:00 [INF] Executing endpoint 'Movie_API.Controllers.MoviesController.GetAll (Movie_API)'
+2025-10-15 14:27:54.075 +07:00 [INF] Route matched with {action = "GetAll", controller = "Movies"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetAll(System.String, System.String, System.String, Boolean, Int32, Int32) on controller Movie_API.Controllers.MoviesController (Movie_API).
+2025-10-15 14:27:54.093 +07:00 [INF] Executing action method Movie_API.Controllers.MoviesController.GetAll (Movie_API) - Validation state: "Valid"
+2025-10-15 14:27:54.107 +07:00 [INF] Executed DbCommand (9ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[Title], [t].[Description], [t].[IsWatched], CASE
+    WHEN [t].[IsWatched] = CAST(1 AS bit) THEN [t].[DateWatched]
+    ELSE NULL
+END, CASE
+    WHEN [t].[IsWatched] = CAST(1 AS bit) THEN [t].[Rating]
+    ELSE NULL
+END, [t].[Genre], [t].[PosterUrl], [s].[Name], [s].[Id], [t0].[FullName], [t0].[Id], [t0].[Id0]
+FROM (
+    SELECT [m].[Id], [m].[DateWatched], [m].[Description], [m].[Genre], [m].[IsWatched], [m].[PosterUrl], [m].[Rating], [m].[StudioID], [m].[Title]
+    FROM [Movies] AS [m]
+    ORDER BY [m].[Title]
+    OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+) AS [t]
+INNER JOIN [Studios] AS [s] ON [t].[StudioID] = [s].[Id]
+LEFT JOIN (
+    SELECT [a].[FullName], [m0].[Id], [a].[Id] AS [Id0], [m0].[MovieId]
+    FROM [Movie_Actors] AS [m0]
+    INNER JOIN [Actors] AS [a] ON [m0].[ActorId] = [a].[Id]
+) AS [t0] ON [t].[Id] = [t0].[MovieId]
+ORDER BY [t].[Title], [t].[Id], [s].[Id], [t0].[Id]
+2025-10-15 14:27:54.109 +07:00 [INF] Executed action method Movie_API.Controllers.MoviesController.GetAll (Movie_API), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 14.2061ms.
+2025-10-15 14:27:54.110 +07:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[Movie_API.Models.DTO.MovieWithActorAndStudioDTO, Movie_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-10-15 14:27:54.112 +07:00 [INF] Executed action Movie_API.Controllers.MoviesController.GetAll (Movie_API) in 36.115ms
+2025-10-15 14:27:54.113 +07:00 [INF] Executed endpoint 'Movie_API.Controllers.MoviesController.GetAll (Movie_API)'
+2025-10-15 14:27:54.114 +07:00 [INF] Request finished HTTP/1.1 GET http://10.0.2.2:5099/api/Movies/get-all-movies?filterQuery=&sortBy=title&isAscending=true&pageNumber=1&pageSize=10 - 200 null application/json; charset=utf-8 43.8736ms
+2025-10-15 14:27:55.001 +07:00 [INF] Request starting HTTP/1.1 GET http://10.0.2.2:5099/api/Movie/GetAllImages - null null
+2025-10-15 14:27:55.003 +07:00 [INF] Executing endpoint 'Movie_API.Controllers.ImagesController.GetInfoAllImages (Movie_API)'
+2025-10-15 14:27:55.005 +07:00 [INF] Route matched with {action = "GetInfoAllImages", controller = "Images"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetInfoAllImages() on controller Movie_API.Controllers.ImagesController (Movie_API).
+2025-10-15 14:27:55.022 +07:00 [INF] Executing action method Movie_API.Controllers.ImagesController.GetInfoAllImages (Movie_API) - Validation state: "Valid"
+2025-10-15 14:27:55.023 +07:00 [INF] Executed action method Movie_API.Controllers.ImagesController.GetInfoAllImages (Movie_API), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 0.0264ms.
+2025-10-15 14:27:55.024 +07:00 [INF] Executing OkObjectResult, writing value of type 'System.Linq.Enumerable+SelectEnumerableIterator`2[[Movie_API.Models.Domain.Image, Movie_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[<>f__AnonymousType3`7[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int64, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], Movie_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-10-15 14:27:55.031 +07:00 [INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[FileDescription], [i].[FileExtension], [i].[FileName], [i].[FilePath], [i].[FileSizeInBytes], [i].[ThumbnailFileName]
+FROM [Images] AS [i]
+2025-10-15 14:27:55.033 +07:00 [INF] Executed action Movie_API.Controllers.ImagesController.GetInfoAllImages (Movie_API) in 26.1959ms
+2025-10-15 14:27:55.036 +07:00 [INF] Executed endpoint 'Movie_API.Controllers.ImagesController.GetInfoAllImages (Movie_API)'
+2025-10-15 14:27:55.037 +07:00 [INF] Request finished HTTP/1.1 GET http://10.0.2.2:5099/api/Movie/GetAllImages - 200 null application/json; charset=utf-8 35.6363ms
+2025-10-15 14:27:55.154 +07:00 [INF] Request starting HTTP/1.1 GET http://10.0.2.2:5099/uploads/image2_9f7699f6-78ad-4c6c-b19e-7eed0093210e.jpg - null null
+2025-10-15 14:27:55.156 +07:00 [INF] Executing endpoint 'HTTP: GET, HEAD /uploads/{*path}'
+2025-10-15 14:27:55.157 +07:00 [INF] Sending file with download name ''.
+2025-10-15 14:27:55.166 +07:00 [INF] Executed endpoint 'HTTP: GET, HEAD /uploads/{*path}'
+2025-10-15 14:27:55.170 +07:00 [INF] Request finished HTTP/1.1 GET http://10.0.2.2:5099/uploads/image2_9f7699f6-78ad-4c6c-b19e-7eed0093210e.jpg - 200 166136 image/jpeg 15.7105ms
+2025-10-15 14:28:22.547 +07:00 [INF] Request starting HTTP/1.1 POST http://localhost:5099/api/Movie/7/thumbnail - multipart/form-data; boundary=----WebKitFormBoundaryIq5yOLSaDHU6FPED 134213
+2025-10-15 14:28:22.577 +07:00 [INF] CORS policy execution successful.
+2025-10-15 14:28:22.581 +07:00 [INF] Executing endpoint 'Movie_API.Controllers.ImagesController.UploadThumbnail (Movie_API)'
+2025-10-15 14:28:22.582 +07:00 [INF] Route matched with {action = "UploadThumbnail", controller = "Images"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] UploadThumbnail(Int32, Movie_API.Models.DTO.ThumbnailUploadRequestDTO) on controller Movie_API.Controllers.ImagesController (Movie_API).
+2025-10-15 14:28:22.610 +07:00 [INF] Executing action method Movie_API.Controllers.ImagesController.UploadThumbnail (Movie_API) - Validation state: "Valid"
+2025-10-15 14:28:22.619 +07:00 [INF] Executed DbCommand (2ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [i].[Id], [i].[FileDescription], [i].[FileExtension], [i].[FileName], [i].[FilePath], [i].[FileSizeInBytes], [i].[ThumbnailFileName]
+FROM [Images] AS [i]
+WHERE [i].[Id] = @__id_0
+2025-10-15 14:28:22.633 +07:00 [INF] Executed DbCommand (3ms) [Parameters=[@p6='?' (DbType = Int32), @p0='?' (Size = 4000), @p1='?' (Size = 4000), @p2='?' (Size = 4000), @p3='?' (Size = 4000), @p4='?' (DbType = Int64), @p5='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Images] SET [FileDescription] = @p0, [FileExtension] = @p1, [FileName] = @p2, [FilePath] = @p3, [FileSizeInBytes] = @p4, [ThumbnailFileName] = @p5
+OUTPUT 1
+WHERE [Id] = @p6;
+2025-10-15 14:28:22.634 +07:00 [INF] Executed action method Movie_API.Controllers.ImagesController.UploadThumbnail (Movie_API), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 18.9826ms.
+2025-10-15 14:28:22.635 +07:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType5`3[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-10-15 14:28:22.636 +07:00 [INF] Executed action Movie_API.Controllers.ImagesController.UploadThumbnail (Movie_API) in 51.962ms
+2025-10-15 14:28:22.636 +07:00 [INF] Executed endpoint 'Movie_API.Controllers.ImagesController.UploadThumbnail (Movie_API)'
+2025-10-15 14:28:22.637 +07:00 [INF] Request finished HTTP/1.1 POST http://localhost:5099/api/Movie/7/thumbnail - 200 null application/json; charset=utf-8 90.3277ms
+2025-10-15 14:28:39.310 +07:00 [INF] Request starting HTTP/1.1 POST http://localhost:5099/api/Movie/8/thumbnail - multipart/form-data; boundary=----WebKitFormBoundary6p5QpOb0sv1hhX1y 264970
+2025-10-15 14:28:39.313 +07:00 [INF] CORS policy execution successful.
+2025-10-15 14:28:39.314 +07:00 [INF] Executing endpoint 'Movie_API.Controllers.ImagesController.UploadThumbnail (Movie_API)'
+2025-10-15 14:28:39.315 +07:00 [INF] Route matched with {action = "UploadThumbnail", controller = "Images"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] UploadThumbnail(Int32, Movie_API.Models.DTO.ThumbnailUploadRequestDTO) on controller Movie_API.Controllers.ImagesController (Movie_API).
+2025-10-15 14:28:39.343 +07:00 [INF] Executing action method Movie_API.Controllers.ImagesController.UploadThumbnail (Movie_API) - Validation state: "Valid"
+2025-10-15 14:28:39.348 +07:00 [INF] Executed DbCommand (3ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [i].[Id], [i].[FileDescription], [i].[FileExtension], [i].[FileName], [i].[FilePath], [i].[FileSizeInBytes], [i].[ThumbnailFileName]
+FROM [Images] AS [i]
+WHERE [i].[Id] = @__id_0
+2025-10-15 14:28:39.364 +07:00 [INF] Executed DbCommand (3ms) [Parameters=[@p6='?' (DbType = Int32), @p0='?' (Size = 4000), @p1='?' (Size = 4000), @p2='?' (Size = 4000), @p3='?' (Size = 4000), @p4='?' (DbType = Int64), @p5='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Images] SET [FileDescription] = @p0, [FileExtension] = @p1, [FileName] = @p2, [FilePath] = @p3, [FileSizeInBytes] = @p4, [ThumbnailFileName] = @p5
+OUTPUT 1
+WHERE [Id] = @p6;
+2025-10-15 14:28:39.367 +07:00 [INF] Executed action method Movie_API.Controllers.ImagesController.UploadThumbnail (Movie_API), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 23.1021ms.
+2025-10-15 14:28:39.368 +07:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType5`3[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-10-15 14:28:39.369 +07:00 [INF] Executed action Movie_API.Controllers.ImagesController.UploadThumbnail (Movie_API) in 53.4067ms
+2025-10-15 14:28:39.371 +07:00 [INF] Executed endpoint 'Movie_API.Controllers.ImagesController.UploadThumbnail (Movie_API)'
+2025-10-15 14:28:39.372 +07:00 [INF] Request finished HTTP/1.1 POST http://localhost:5099/api/Movie/8/thumbnail - 200 null application/json; charset=utf-8 62.2149ms
+2025-10-15 14:29:06.075 +07:00 [INF] Request starting HTTP/1.1 POST http://localhost:5099/api/Movie/9/thumbnail - multipart/form-data; boundary=----WebKitFormBoundaryBir4QAfId1CJZ2dF 245754
+2025-10-15 14:29:06.086 +07:00 [INF] CORS policy execution successful.
+2025-10-15 14:29:06.087 +07:00 [INF] Executing endpoint 'Movie_API.Controllers.ImagesController.UploadThumbnail (Movie_API)'
+2025-10-15 14:29:06.088 +07:00 [INF] Route matched with {action = "UploadThumbnail", controller = "Images"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] UploadThumbnail(Int32, Movie_API.Models.DTO.ThumbnailUploadRequestDTO) on controller Movie_API.Controllers.ImagesController (Movie_API).
+2025-10-15 14:29:06.114 +07:00 [INF] Executing action method Movie_API.Controllers.ImagesController.UploadThumbnail (Movie_API) - Validation state: "Valid"
+2025-10-15 14:29:06.117 +07:00 [INF] Executed DbCommand (1ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [i].[Id], [i].[FileDescription], [i].[FileExtension], [i].[FileName], [i].[FilePath], [i].[FileSizeInBytes], [i].[ThumbnailFileName]
+FROM [Images] AS [i]
+WHERE [i].[Id] = @__id_0
+2025-10-15 14:29:06.131 +07:00 [INF] Executed DbCommand (3ms) [Parameters=[@p6='?' (DbType = Int32), @p0='?' (Size = 4000), @p1='?' (Size = 4000), @p2='?' (Size = 4000), @p3='?' (Size = 4000), @p4='?' (DbType = Int64), @p5='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Images] SET [FileDescription] = @p0, [FileExtension] = @p1, [FileName] = @p2, [FilePath] = @p3, [FileSizeInBytes] = @p4, [ThumbnailFileName] = @p5
+OUTPUT 1
+WHERE [Id] = @p6;
+2025-10-15 14:29:06.132 +07:00 [INF] Executed action method Movie_API.Controllers.ImagesController.UploadThumbnail (Movie_API), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 16.9827ms.
+2025-10-15 14:29:06.133 +07:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType5`3[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-10-15 14:29:06.134 +07:00 [INF] Executed action Movie_API.Controllers.ImagesController.UploadThumbnail (Movie_API) in 45.6706ms
+2025-10-15 14:29:06.135 +07:00 [INF] Executed endpoint 'Movie_API.Controllers.ImagesController.UploadThumbnail (Movie_API)'
+2025-10-15 14:29:06.136 +07:00 [INF] Request finished HTTP/1.1 POST http://localhost:5099/api/Movie/9/thumbnail - 200 null application/json; charset=utf-8 62.5545ms
+2025-10-15 14:29:12.241 +07:00 [INF] Request starting HTTP/1.1 GET http://10.0.2.2:5099/api/Movies/get-all-movies?filterQuery=&sortBy=title&isAscending=true&pageNumber=1&pageSize=10 - null null
+2025-10-15 14:29:12.242 +07:00 [INF] Executing endpoint 'Movie_API.Controllers.MoviesController.GetAll (Movie_API)'
+2025-10-15 14:29:12.243 +07:00 [INF] Route matched with {action = "GetAll", controller = "Movies"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetAll(System.String, System.String, System.String, Boolean, Int32, Int32) on controller Movie_API.Controllers.MoviesController (Movie_API).
+2025-10-15 14:29:12.267 +07:00 [INF] Executing action method Movie_API.Controllers.MoviesController.GetAll (Movie_API) - Validation state: "Valid"
+2025-10-15 14:29:12.281 +07:00 [INF] Executed DbCommand (12ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[Title], [t].[Description], [t].[IsWatched], CASE
+    WHEN [t].[IsWatched] = CAST(1 AS bit) THEN [t].[DateWatched]
+    ELSE NULL
+END, CASE
+    WHEN [t].[IsWatched] = CAST(1 AS bit) THEN [t].[Rating]
+    ELSE NULL
+END, [t].[Genre], [t].[PosterUrl], [s].[Name], [s].[Id], [t0].[FullName], [t0].[Id], [t0].[Id0]
+FROM (
+    SELECT [m].[Id], [m].[DateWatched], [m].[Description], [m].[Genre], [m].[IsWatched], [m].[PosterUrl], [m].[Rating], [m].[StudioID], [m].[Title]
+    FROM [Movies] AS [m]
+    ORDER BY [m].[Title]
+    OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+) AS [t]
+INNER JOIN [Studios] AS [s] ON [t].[StudioID] = [s].[Id]
+LEFT JOIN (
+    SELECT [a].[FullName], [m0].[Id], [a].[Id] AS [Id0], [m0].[MovieId]
+    FROM [Movie_Actors] AS [m0]
+    INNER JOIN [Actors] AS [a] ON [m0].[ActorId] = [a].[Id]
+) AS [t0] ON [t].[Id] = [t0].[MovieId]
+ORDER BY [t].[Title], [t].[Id], [s].[Id], [t0].[Id]
+2025-10-15 14:29:12.283 +07:00 [INF] Executed action method Movie_API.Controllers.MoviesController.GetAll (Movie_API), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 14.8348ms.
+2025-10-15 14:29:12.284 +07:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[Movie_API.Models.DTO.MovieWithActorAndStudioDTO, Movie_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-10-15 14:29:12.286 +07:00 [INF] Executed action Movie_API.Controllers.MoviesController.GetAll (Movie_API) in 41.905ms
+2025-10-15 14:29:12.287 +07:00 [INF] Executed endpoint 'Movie_API.Controllers.MoviesController.GetAll (Movie_API)'
+2025-10-15 14:29:12.288 +07:00 [INF] Request finished HTTP/1.1 GET http://10.0.2.2:5099/api/Movies/get-all-movies?filterQuery=&sortBy=title&isAscending=true&pageNumber=1&pageSize=10 - 200 null application/json; charset=utf-8 47.4156ms
+2025-10-15 14:29:13.235 +07:00 [INF] Request starting HTTP/1.1 GET http://10.0.2.2:5099/api/Movie/GetAllImages - null null
+2025-10-15 14:29:13.237 +07:00 [INF] Executing endpoint 'Movie_API.Controllers.ImagesController.GetInfoAllImages (Movie_API)'
+2025-10-15 14:29:13.238 +07:00 [INF] Route matched with {action = "GetInfoAllImages", controller = "Images"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetInfoAllImages() on controller Movie_API.Controllers.ImagesController (Movie_API).
+2025-10-15 14:29:13.254 +07:00 [INF] Executing action method Movie_API.Controllers.ImagesController.GetInfoAllImages (Movie_API) - Validation state: "Valid"
+2025-10-15 14:29:13.256 +07:00 [INF] Executed action method Movie_API.Controllers.ImagesController.GetInfoAllImages (Movie_API), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 0.0499ms.
+2025-10-15 14:29:13.257 +07:00 [INF] Executing OkObjectResult, writing value of type 'System.Linq.Enumerable+SelectEnumerableIterator`2[[Movie_API.Models.Domain.Image, Movie_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[<>f__AnonymousType3`7[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int64, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], Movie_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-10-15 14:29:13.261 +07:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[FileDescription], [i].[FileExtension], [i].[FileName], [i].[FilePath], [i].[FileSizeInBytes], [i].[ThumbnailFileName]
+FROM [Images] AS [i]
+2025-10-15 14:29:13.264 +07:00 [INF] Executed action Movie_API.Controllers.ImagesController.GetInfoAllImages (Movie_API) in 24.9654ms
+2025-10-15 14:29:13.266 +07:00 [INF] Executed endpoint 'Movie_API.Controllers.ImagesController.GetInfoAllImages (Movie_API)'
+2025-10-15 14:29:13.267 +07:00 [INF] Request finished HTTP/1.1 GET http://10.0.2.2:5099/api/Movie/GetAllImages - 200 null application/json; charset=utf-8 32.374ms
+2025-10-15 14:29:13.377 +07:00 [INF] Request starting HTTP/1.1 GET http://10.0.2.2:5099/uploads/6_5cd5538f-54fd-4ba5-a294-63b6922bea68.jpg - null null
+2025-10-15 14:29:13.379 +07:00 [INF] Executing endpoint 'HTTP: GET, HEAD /uploads/{*path}'
+2025-10-15 14:29:13.379 +07:00 [INF] Sending file with download name ''.
+2025-10-15 14:29:13.383 +07:00 [INF] Request starting HTTP/1.1 GET http://10.0.2.2:5099/uploads/hoang_b36a56fc-9749-477e-be11-fc530471084e.jpg - null null
+2025-10-15 14:29:13.388 +07:00 [INF] Executed endpoint 'HTTP: GET, HEAD /uploads/{*path}'
+2025-10-15 14:29:13.401 +07:00 [INF] Executing endpoint 'HTTP: GET, HEAD /uploads/{*path}'
+2025-10-15 14:29:13.402 +07:00 [INF] Request finished HTTP/1.1 GET http://10.0.2.2:5099/uploads/6_5cd5538f-54fd-4ba5-a294-63b6922bea68.jpg - 200 134034 image/jpeg 25.2946ms
+2025-10-15 14:29:13.403 +07:00 [INF] Sending file with download name ''.
+2025-10-15 14:29:13.406 +07:00 [INF] Request starting HTTP/1.1 GET http://10.0.2.2:5099/uploads/image3_175364c3-433a-44a5-927d-6e2dd6695275.jpg - null null
+2025-10-15 14:29:13.417 +07:00 [INF] Executed endpoint 'HTTP: GET, HEAD /uploads/{*path}'
+2025-10-15 14:29:13.418 +07:00 [INF] Executing endpoint 'HTTP: GET, HEAD /uploads/{*path}'
+2025-10-15 14:29:13.418 +07:00 [INF] Request finished HTTP/1.1 GET http://10.0.2.2:5099/uploads/hoang_b36a56fc-9749-477e-be11-fc530471084e.jpg - 200 264787 image/jpeg 36.9073ms
+2025-10-15 14:29:13.419 +07:00 [INF] Sending file with download name ''.
+2025-10-15 14:29:13.436 +07:00 [INF] Executed endpoint 'HTTP: GET, HEAD /uploads/{*path}'
+2025-10-15 14:29:13.437 +07:00 [INF] Request finished HTTP/1.1 GET http://10.0.2.2:5099/uploads/image3_175364c3-433a-44a5-927d-6e2dd6695275.jpg - 200 245570 image/jpeg 31.5748ms
+2025-10-15 14:29:15.139 +07:00 [INF] Request starting HTTP/1.1 GET http://10.0.2.2:5099/uploads/5a15c29e-0f9b-43dc-b40b-911f839b20a1.mp4 - null null
+2025-10-15 14:29:15.142 +07:00 [INF] Executing endpoint 'HTTP: GET, HEAD /uploads/{*path}'
+2025-10-15 14:29:15.143 +07:00 [INF] Sending file with download name ''.
+2025-10-15 14:29:15.250 +07:00 [INF] Executed endpoint 'HTTP: GET, HEAD /uploads/{*path}'
+2025-10-15 14:29:15.251 +07:00 [INF] Request finished HTTP/1.1 GET http://10.0.2.2:5099/uploads/5a15c29e-0f9b-43dc-b40b-911f839b20a1.mp4 - 200 4331120 video/mp4 112.1384ms
+2025-10-15 14:29:15.257 +07:00 [INF] Request starting HTTP/1.1 GET http://10.0.2.2:5099/uploads/5a15c29e-0f9b-43dc-b40b-911f839b20a1.mp4 - null null
+2025-10-15 14:29:15.259 +07:00 [INF] Executing endpoint 'HTTP: GET, HEAD /uploads/{*path}'
+2025-10-15 14:29:15.260 +07:00 [INF] Sending file with download name ''.
+2025-10-15 14:29:15.262 +07:00 [INF] Executed endpoint 'HTTP: GET, HEAD /uploads/{*path}'
+2025-10-15 14:29:15.263 +07:00 [INF] Request finished HTTP/1.1 GET http://10.0.2.2:5099/uploads/5a15c29e-0f9b-43dc-b40b-911f839b20a1.mp4 - 206 13352 video/mp4 6.1061ms
+2025-10-15 14:29:15.276 +07:00 [INF] Request starting HTTP/1.1 GET http://10.0.2.2:5099/uploads/5a15c29e-0f9b-43dc-b40b-911f839b20a1.mp4 - null null
+2025-10-15 14:29:15.277 +07:00 [INF] Executing endpoint 'HTTP: GET, HEAD /uploads/{*path}'
+2025-10-15 14:29:15.278 +07:00 [INF] Sending file with download name ''.
+2025-10-15 14:29:16.450 +07:00 [INF] Executed endpoint 'HTTP: GET, HEAD /uploads/{*path}'
+2025-10-15 14:29:16.451 +07:00 [INF] Request finished HTTP/1.1 GET http://10.0.2.2:5099/uploads/5a15c29e-0f9b-43dc-b40b-911f839b20a1.mp4 - 206 4331072 video/mp4 1175.6774ms
+2025-10-15 14:29:21.370 +07:00 [INF] Request starting HTTP/1.1 GET http://10.0.2.2:5099/uploads/d9f927d6-1834-4778-b37f-dcfce24690fa.mp4 - null null
+2025-10-15 14:29:21.373 +07:00 [INF] Executing endpoint 'HTTP: GET, HEAD /uploads/{*path}'
+2025-10-15 14:29:21.373 +07:00 [INF] Sending file with download name ''.
+2025-10-15 14:29:21.478 +07:00 [INF] Executed endpoint 'HTTP: GET, HEAD /uploads/{*path}'
+2025-10-15 14:29:21.478 +07:00 [INF] Request finished HTTP/1.1 GET http://10.0.2.2:5099/uploads/d9f927d6-1834-4778-b37f-dcfce24690fa.mp4 - 200 2658737 video/mp4 108.741ms
+2025-10-15 14:29:21.482 +07:00 [INF] Request starting HTTP/1.1 GET http://10.0.2.2:5099/uploads/d9f927d6-1834-4778-b37f-dcfce24690fa.mp4 - null null
+2025-10-15 14:29:21.485 +07:00 [INF] Executing endpoint 'HTTP: GET, HEAD /uploads/{*path}'
+2025-10-15 14:29:21.486 +07:00 [INF] Sending file with download name ''.
+2025-10-15 14:29:21.487 +07:00 [INF] Executed endpoint 'HTTP: GET, HEAD /uploads/{*path}'
+2025-10-15 14:29:21.488 +07:00 [INF] Request finished HTTP/1.1 GET http://10.0.2.2:5099/uploads/d9f927d6-1834-4778-b37f-dcfce24690fa.mp4 - 206 10980 video/mp4 5.4198ms
+2025-10-15 14:29:21.497 +07:00 [INF] Request starting HTTP/1.1 GET http://10.0.2.2:5099/uploads/d9f927d6-1834-4778-b37f-dcfce24690fa.mp4 - null null
+2025-10-15 14:29:21.499 +07:00 [INF] Executing endpoint 'HTTP: GET, HEAD /uploads/{*path}'
+2025-10-15 14:29:21.500 +07:00 [INF] Sending file with download name ''.
+2025-10-15 14:29:22.373 +07:00 [INF] Executed endpoint 'HTTP: GET, HEAD /uploads/{*path}'
+2025-10-15 14:29:22.374 +07:00 [INF] Request finished HTTP/1.1 GET http://10.0.2.2:5099/uploads/d9f927d6-1834-4778-b37f-dcfce24690fa.mp4 - 206 2658689 video/mp4 876.8349ms
+2025-10-15 14:29:26.021 +07:00 [INF] Request starting HTTP/1.1 GET http://10.0.2.2:5099/uploads/5a15c29e-0f9b-43dc-b40b-911f839b20a1.mp4 - null null
+2025-10-15 14:29:26.024 +07:00 [INF] Executing endpoint 'HTTP: GET, HEAD /uploads/{*path}'
+2025-10-15 14:29:26.025 +07:00 [INF] Sending file with download name ''.
+2025-10-15 14:29:26.135 +07:00 [INF] Executed endpoint 'HTTP: GET, HEAD /uploads/{*path}'
+2025-10-15 14:29:26.136 +07:00 [INF] Request finished HTTP/1.1 GET http://10.0.2.2:5099/uploads/5a15c29e-0f9b-43dc-b40b-911f839b20a1.mp4 - 200 4331120 video/mp4 114.4083ms
+2025-10-15 14:29:26.138 +07:00 [INF] Request starting HTTP/1.1 GET http://10.0.2.2:5099/uploads/5a15c29e-0f9b-43dc-b40b-911f839b20a1.mp4 - null null
+2025-10-15 14:29:26.140 +07:00 [INF] Executing endpoint 'HTTP: GET, HEAD /uploads/{*path}'
+2025-10-15 14:29:26.140 +07:00 [INF] Sending file with download name ''.
+2025-10-15 14:29:26.141 +07:00 [INF] Executed endpoint 'HTTP: GET, HEAD /uploads/{*path}'
+2025-10-15 14:29:26.142 +07:00 [INF] Request finished HTTP/1.1 GET http://10.0.2.2:5099/uploads/5a15c29e-0f9b-43dc-b40b-911f839b20a1.mp4 - 206 13352 video/mp4 4.082ms
+2025-10-15 14:29:26.153 +07:00 [INF] Request starting HTTP/1.1 GET http://10.0.2.2:5099/uploads/5a15c29e-0f9b-43dc-b40b-911f839b20a1.mp4 - null null
+2025-10-15 14:29:26.155 +07:00 [INF] Executing endpoint 'HTTP: GET, HEAD /uploads/{*path}'
+2025-10-15 14:29:26.155 +07:00 [INF] Sending file with download name ''.
+2025-10-15 14:29:27.275 +07:00 [INF] Executed endpoint 'HTTP: GET, HEAD /uploads/{*path}'
+2025-10-15 14:29:27.276 +07:00 [INF] Request finished HTTP/1.1 GET http://10.0.2.2:5099/uploads/5a15c29e-0f9b-43dc-b40b-911f839b20a1.mp4 - 206 4331072 video/mp4 1123.3382ms
+2025-10-15 14:29:31.494 +07:00 [INF] Request starting HTTP/1.1 GET http://10.0.2.2:5099/api/Movies/get-all-movies?filterQuery=&sortBy=title&isAscending=true&pageNumber=1&pageSize=10 - null null
+2025-10-15 14:29:31.497 +07:00 [INF] Executing endpoint 'Movie_API.Controllers.MoviesController.GetAll (Movie_API)'
+2025-10-15 14:29:31.498 +07:00 [INF] Route matched with {action = "GetAll", controller = "Movies"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetAll(System.String, System.String, System.String, Boolean, Int32, Int32) on controller Movie_API.Controllers.MoviesController (Movie_API).
+2025-10-15 14:29:31.533 +07:00 [INF] Executing action method Movie_API.Controllers.MoviesController.GetAll (Movie_API) - Validation state: "Valid"
+2025-10-15 14:29:31.545 +07:00 [INF] Executed DbCommand (9ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[Title], [t].[Description], [t].[IsWatched], CASE
+    WHEN [t].[IsWatched] = CAST(1 AS bit) THEN [t].[DateWatched]
+    ELSE NULL
+END, CASE
+    WHEN [t].[IsWatched] = CAST(1 AS bit) THEN [t].[Rating]
+    ELSE NULL
+END, [t].[Genre], [t].[PosterUrl], [s].[Name], [s].[Id], [t0].[FullName], [t0].[Id], [t0].[Id0]
+FROM (
+    SELECT [m].[Id], [m].[DateWatched], [m].[Description], [m].[Genre], [m].[IsWatched], [m].[PosterUrl], [m].[Rating], [m].[StudioID], [m].[Title]
+    FROM [Movies] AS [m]
+    ORDER BY [m].[Title]
+    OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+) AS [t]
+INNER JOIN [Studios] AS [s] ON [t].[StudioID] = [s].[Id]
+LEFT JOIN (
+    SELECT [a].[FullName], [m0].[Id], [a].[Id] AS [Id0], [m0].[MovieId]
+    FROM [Movie_Actors] AS [m0]
+    INNER JOIN [Actors] AS [a] ON [m0].[ActorId] = [a].[Id]
+) AS [t0] ON [t].[Id] = [t0].[MovieId]
+ORDER BY [t].[Title], [t].[Id], [s].[Id], [t0].[Id]
+2025-10-15 14:29:31.548 +07:00 [INF] Executed action method Movie_API.Controllers.MoviesController.GetAll (Movie_API), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 12.8445ms.
+2025-10-15 14:29:31.549 +07:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[Movie_API.Models.DTO.MovieWithActorAndStudioDTO, Movie_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-10-15 14:29:31.550 +07:00 [INF] Executed action Movie_API.Controllers.MoviesController.GetAll (Movie_API) in 51.2952ms
+2025-10-15 14:29:31.552 +07:00 [INF] Executed endpoint 'Movie_API.Controllers.MoviesController.GetAll (Movie_API)'
+2025-10-15 14:29:31.552 +07:00 [INF] Request finished HTTP/1.1 GET http://10.0.2.2:5099/api/Movies/get-all-movies?filterQuery=&sortBy=title&isAscending=true&pageNumber=1&pageSize=10 - 200 null application/json; charset=utf-8 57.8884ms
+2025-10-15 14:29:32.261 +07:00 [INF] Request starting HTTP/1.1 GET http://10.0.2.2:5099/api/Movie/GetAllImages - null null
+2025-10-15 14:29:32.264 +07:00 [INF] Executing endpoint 'Movie_API.Controllers.ImagesController.GetInfoAllImages (Movie_API)'
+2025-10-15 14:29:32.268 +07:00 [INF] Route matched with {action = "GetInfoAllImages", controller = "Images"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetInfoAllImages() on controller Movie_API.Controllers.ImagesController (Movie_API).
+2025-10-15 14:29:32.284 +07:00 [INF] Executing action method Movie_API.Controllers.ImagesController.GetInfoAllImages (Movie_API) - Validation state: "Valid"
+2025-10-15 14:29:32.286 +07:00 [INF] Executed action method Movie_API.Controllers.ImagesController.GetInfoAllImages (Movie_API), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 0.0296ms.
+2025-10-15 14:29:32.287 +07:00 [INF] Executing OkObjectResult, writing value of type 'System.Linq.Enumerable+SelectEnumerableIterator`2[[Movie_API.Models.Domain.Image, Movie_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[<>f__AnonymousType3`7[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int64, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], Movie_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-10-15 14:29:32.290 +07:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[FileDescription], [i].[FileExtension], [i].[FileName], [i].[FilePath], [i].[FileSizeInBytes], [i].[ThumbnailFileName]
+FROM [Images] AS [i]
+2025-10-15 14:29:32.293 +07:00 [INF] Executed action Movie_API.Controllers.ImagesController.GetInfoAllImages (Movie_API) in 22.5536ms
+2025-10-15 14:29:32.294 +07:00 [INF] Executed endpoint 'Movie_API.Controllers.ImagesController.GetInfoAllImages (Movie_API)'
+2025-10-15 14:29:32.295 +07:00 [INF] Request finished HTTP/1.1 GET http://10.0.2.2:5099/api/Movie/GetAllImages - 200 null application/json; charset=utf-8 34.3558ms
+2025-10-15 14:29:33.286 +07:00 [INF] Request starting HTTP/1.1 GET http://10.0.2.2:5099/uploads/5a15c29e-0f9b-43dc-b40b-911f839b20a1.mp4 - null null
+2025-10-15 14:29:33.290 +07:00 [INF] Executing endpoint 'HTTP: GET, HEAD /uploads/{*path}'
+2025-10-15 14:29:33.290 +07:00 [INF] Sending file with download name ''.
+2025-10-15 14:29:33.396 +07:00 [INF] Executed endpoint 'HTTP: GET, HEAD /uploads/{*path}'
+2025-10-15 14:29:33.397 +07:00 [INF] Request finished HTTP/1.1 GET http://10.0.2.2:5099/uploads/5a15c29e-0f9b-43dc-b40b-911f839b20a1.mp4 - 200 4331120 video/mp4 110.6669ms
+2025-10-15 14:29:33.399 +07:00 [INF] Request starting HTTP/1.1 GET http://10.0.2.2:5099/uploads/5a15c29e-0f9b-43dc-b40b-911f839b20a1.mp4 - null null
+2025-10-15 14:29:33.401 +07:00 [INF] Executing endpoint 'HTTP: GET, HEAD /uploads/{*path}'
+2025-10-15 14:29:33.402 +07:00 [INF] Sending file with download name ''.
+2025-10-15 14:29:33.403 +07:00 [INF] Executed endpoint 'HTTP: GET, HEAD /uploads/{*path}'
+2025-10-15 14:29:33.404 +07:00 [INF] Request finished HTTP/1.1 GET http://10.0.2.2:5099/uploads/5a15c29e-0f9b-43dc-b40b-911f839b20a1.mp4 - 206 13352 video/mp4 4.7536ms
+2025-10-15 14:29:33.417 +07:00 [INF] Request starting HTTP/1.1 GET http://10.0.2.2:5099/uploads/5a15c29e-0f9b-43dc-b40b-911f839b20a1.mp4 - null null
+2025-10-15 14:29:33.419 +07:00 [INF] Executing endpoint 'HTTP: GET, HEAD /uploads/{*path}'
+2025-10-15 14:29:33.420 +07:00 [INF] Sending file with download name ''.
+2025-10-15 14:29:34.548 +07:00 [INF] Executed endpoint 'HTTP: GET, HEAD /uploads/{*path}'
+2025-10-15 14:29:34.549 +07:00 [INF] Request finished HTTP/1.1 GET http://10.0.2.2:5099/uploads/5a15c29e-0f9b-43dc-b40b-911f839b20a1.mp4 - 206 4331072 video/mp4 1132.2986ms
+2025-10-15 14:33:18.013 +07:00 [INF] Request starting HTTP/1.1 POST http://localhost:5099/api/Movie/Upload - multipart/form-data; boundary=----WebKitFormBoundaryOGPxjjcCmSia8GNJ 5250604
+2025-10-15 14:33:18.030 +07:00 [INF] CORS policy execution successful.
+2025-10-15 14:33:18.031 +07:00 [INF] Executing endpoint 'Movie_API.Controllers.ImagesController.Upload (Movie_API)'
+2025-10-15 14:33:18.035 +07:00 [INF] Route matched with {action = "Upload", controller = "Images"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Upload(Movie_API.Models.DTO.ImageUploadRequestDTO) on controller Movie_API.Controllers.ImagesController (Movie_API).
+2025-10-15 14:33:18.169 +07:00 [INF] Executing action method Movie_API.Controllers.ImagesController.Upload (Movie_API) - Validation state: "Valid"
+2025-10-15 14:33:18.511 +07:00 [INF] Executed DbCommand (8ms) [Parameters=[@p0='?' (Size = 4000), @p1='?' (Size = 4000), @p2='?' (Size = 4000), @p3='?' (Size = 4000), @p4='?' (DbType = Int64), @p5='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Images] ([FileDescription], [FileExtension], [FileName], [FilePath], [FileSizeInBytes], [ThumbnailFileName])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5);
+2025-10-15 14:33:18.542 +07:00 [ERR] An exception occurred in the database while saving changes for context type 'Movie_API.Data.AppDbContext'.
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): Cannot insert the value NULL into column 'FilePath', table 'MovieWebAPI.dbo.Images'; column does not allow nulls. INSERT fails.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryHasMoreRows(Boolean& moreRows)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryReadInternal(Boolean setTimeout, Boolean& more)
+   at Microsoft.Data.SqlClient.SqlDataReader.Read()
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeResultSet(Int32 startCommandIndex, RelationalDataReader reader)
+ClientConnectionId:09760b3a-d5ea-464e-ad44-a2bb926df6c8
+Error Number:515,State:2,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeResultSet(Int32 startCommandIndex, RelationalDataReader reader)
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.Consume(RelationalDataReader reader)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.SqlServer.Update.Internal.SqlServerModificationCommandBatch.Execute(IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.Execute(IEnumerable`1 commandBatches, IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChanges(IList`1 entries)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(IList`1 entriesToSave)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(StateManager stateManager, Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.<>c.<SaveChanges>b__112_0(DbContext _, ValueTuple`2 t)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges(Boolean acceptAllChangesOnSuccess)
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): Cannot insert the value NULL into column 'FilePath', table 'MovieWebAPI.dbo.Images'; column does not allow nulls. INSERT fails.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryHasMoreRows(Boolean& moreRows)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryReadInternal(Boolean setTimeout, Boolean& more)
+   at Microsoft.Data.SqlClient.SqlDataReader.Read()
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeResultSet(Int32 startCommandIndex, RelationalDataReader reader)
+ClientConnectionId:09760b3a-d5ea-464e-ad44-a2bb926df6c8
+Error Number:515,State:2,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeResultSet(Int32 startCommandIndex, RelationalDataReader reader)
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.Consume(RelationalDataReader reader)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.SqlServer.Update.Internal.SqlServerModificationCommandBatch.Execute(IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.Execute(IEnumerable`1 commandBatches, IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChanges(IList`1 entries)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(IList`1 entriesToSave)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(StateManager stateManager, Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.<>c.<SaveChanges>b__112_0(DbContext _, ValueTuple`2 t)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges(Boolean acceptAllChangesOnSuccess)
+2025-10-15 14:33:18.578 +07:00 [INF] Executed action Movie_API.Controllers.ImagesController.Upload (Movie_API) in 541.5912ms
+2025-10-15 14:33:18.579 +07:00 [INF] Executed endpoint 'Movie_API.Controllers.ImagesController.Upload (Movie_API)'
+2025-10-15 14:33:18.581 +07:00 [ERR] An unhandled exception has occurred while executing the request.
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): Cannot insert the value NULL into column 'FilePath', table 'MovieWebAPI.dbo.Images'; column does not allow nulls. INSERT fails.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryHasMoreRows(Boolean& moreRows)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryReadInternal(Boolean setTimeout, Boolean& more)
+   at Microsoft.Data.SqlClient.SqlDataReader.Read()
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeResultSet(Int32 startCommandIndex, RelationalDataReader reader)
+ClientConnectionId:09760b3a-d5ea-464e-ad44-a2bb926df6c8
+Error Number:515,State:2,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeResultSet(Int32 startCommandIndex, RelationalDataReader reader)
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.Consume(RelationalDataReader reader)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.SqlServer.Update.Internal.SqlServerModificationCommandBatch.Execute(IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.Execute(IEnumerable`1 commandBatches, IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChanges(IList`1 entries)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(IList`1 entriesToSave)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(StateManager stateManager, Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.<>c.<SaveChanges>b__112_0(DbContext _, ValueTuple`2 t)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges()
+   at Movie_API.Repositories.LocalImageRepository.Upload(Image image) in I:\Movie_API\Movie_API\Repositories\LocalImageRepository.cs:line 23
+   at Movie_API.Controllers.ImagesController.Upload(ImageUploadRequestDTO request) in I:\Movie_API\Movie_API\Controllers\ImagesController.cs:line 65
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Logged|12_1(ControllerActionInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2025-10-15 14:33:18.600 +07:00 [INF] Request finished HTTP/1.1 POST http://localhost:5099/api/Movie/Upload - 500 null text/plain; charset=utf-8 586.4996ms
+2025-10-15 14:33:56.364 +07:00 [INF] Request starting HTTP/1.1 POST http://localhost:5099/api/Movie/Upload - multipart/form-data; boundary=----WebKitFormBoundaryBt7msREDBb9A9WvN 5250614
+2025-10-15 14:33:56.387 +07:00 [INF] CORS policy execution successful.
+2025-10-15 14:33:56.387 +07:00 [INF] Executing endpoint 'Movie_API.Controllers.ImagesController.Upload (Movie_API)'
+2025-10-15 14:33:56.388 +07:00 [INF] Route matched with {action = "Upload", controller = "Images"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Upload(Movie_API.Models.DTO.ImageUploadRequestDTO) on controller Movie_API.Controllers.ImagesController (Movie_API).
+2025-10-15 14:33:56.462 +07:00 [INF] Executing action method Movie_API.Controllers.ImagesController.Upload (Movie_API) - Validation state: "Valid"
+2025-10-15 14:33:56.657 +07:00 [INF] Executed DbCommand (2ms) [Parameters=[@p0='?' (Size = 4000), @p1='?' (Size = 4000), @p2='?' (Size = 4000), @p3='?' (Size = 4000), @p4='?' (DbType = Int64), @p5='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Images] ([FileDescription], [FileExtension], [FileName], [FilePath], [FileSizeInBytes], [ThumbnailFileName])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5);
+2025-10-15 14:33:56.660 +07:00 [ERR] An exception occurred in the database while saving changes for context type 'Movie_API.Data.AppDbContext'.
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): Cannot insert the value NULL into column 'FilePath', table 'MovieWebAPI.dbo.Images'; column does not allow nulls. INSERT fails.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryHasMoreRows(Boolean& moreRows)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryReadInternal(Boolean setTimeout, Boolean& more)
+   at Microsoft.Data.SqlClient.SqlDataReader.Read()
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeResultSet(Int32 startCommandIndex, RelationalDataReader reader)
+ClientConnectionId:09760b3a-d5ea-464e-ad44-a2bb926df6c8
+Error Number:515,State:2,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeResultSet(Int32 startCommandIndex, RelationalDataReader reader)
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.Consume(RelationalDataReader reader)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.SqlServer.Update.Internal.SqlServerModificationCommandBatch.Execute(IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.Execute(IEnumerable`1 commandBatches, IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChanges(IList`1 entries)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(IList`1 entriesToSave)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(StateManager stateManager, Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.<>c.<SaveChanges>b__112_0(DbContext _, ValueTuple`2 t)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges(Boolean acceptAllChangesOnSuccess)
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): Cannot insert the value NULL into column 'FilePath', table 'MovieWebAPI.dbo.Images'; column does not allow nulls. INSERT fails.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryHasMoreRows(Boolean& moreRows)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryReadInternal(Boolean setTimeout, Boolean& more)
+   at Microsoft.Data.SqlClient.SqlDataReader.Read()
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeResultSet(Int32 startCommandIndex, RelationalDataReader reader)
+ClientConnectionId:09760b3a-d5ea-464e-ad44-a2bb926df6c8
+Error Number:515,State:2,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeResultSet(Int32 startCommandIndex, RelationalDataReader reader)
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.Consume(RelationalDataReader reader)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.SqlServer.Update.Internal.SqlServerModificationCommandBatch.Execute(IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.Execute(IEnumerable`1 commandBatches, IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChanges(IList`1 entries)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(IList`1 entriesToSave)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(StateManager stateManager, Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.<>c.<SaveChanges>b__112_0(DbContext _, ValueTuple`2 t)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges(Boolean acceptAllChangesOnSuccess)
+2025-10-15 14:33:56.680 +07:00 [INF] Executed action Movie_API.Controllers.ImagesController.Upload (Movie_API) in 290.9685ms
+2025-10-15 14:33:56.681 +07:00 [INF] Executed endpoint 'Movie_API.Controllers.ImagesController.Upload (Movie_API)'
+2025-10-15 14:33:56.683 +07:00 [ERR] An unhandled exception has occurred while executing the request.
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): Cannot insert the value NULL into column 'FilePath', table 'MovieWebAPI.dbo.Images'; column does not allow nulls. INSERT fails.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryHasMoreRows(Boolean& moreRows)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryReadInternal(Boolean setTimeout, Boolean& more)
+   at Microsoft.Data.SqlClient.SqlDataReader.Read()
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeResultSet(Int32 startCommandIndex, RelationalDataReader reader)
+ClientConnectionId:09760b3a-d5ea-464e-ad44-a2bb926df6c8
+Error Number:515,State:2,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeResultSet(Int32 startCommandIndex, RelationalDataReader reader)
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.Consume(RelationalDataReader reader)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.SqlServer.Update.Internal.SqlServerModificationCommandBatch.Execute(IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.Execute(IEnumerable`1 commandBatches, IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChanges(IList`1 entries)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(IList`1 entriesToSave)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(StateManager stateManager, Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.<>c.<SaveChanges>b__112_0(DbContext _, ValueTuple`2 t)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges()
+   at Movie_API.Repositories.LocalImageRepository.Upload(Image image) in I:\Movie_API\Movie_API\Repositories\LocalImageRepository.cs:line 23
+   at Movie_API.Controllers.ImagesController.Upload(ImageUploadRequestDTO request) in I:\Movie_API\Movie_API\Controllers\ImagesController.cs:line 65
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Logged|12_1(ControllerActionInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2025-10-15 14:33:56.690 +07:00 [INF] Request finished HTTP/1.1 POST http://localhost:5099/api/Movie/Upload - 500 null text/plain; charset=utf-8 325.6002ms
+2025-10-15 14:36:06.689 +07:00 [INF] User profile is available. Using 'C:\Users\Admin\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-10-15 14:36:06.860 +07:00 [INF] Now listening on: http://0.0.0.0:5099
+2025-10-15 14:36:06.909 +07:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-10-15 14:36:06.910 +07:00 [INF] Hosting environment: Development
+2025-10-15 14:36:06.910 +07:00 [INF] Content root path: I:\Movie_API\Movie_API
+2025-10-15 14:36:08.041 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5099/_framework/aspnetcore-browser-refresh.js - null null
+2025-10-15 14:36:08.054 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5099/_framework/aspnetcore-browser-refresh.js - 200 16503 application/javascript; charset=utf-8 15.9396ms
+2025-10-15 14:36:08.114 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5099/_vs/browserLink - null null
+2025-10-15 14:36:08.169 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5099/_vs/browserLink - 200 null text/javascript; charset=UTF-8 54.953ms
+2025-10-15 14:36:08.915 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5099/swagger/v1/swagger.json - null null
+2025-10-15 14:36:08.951 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5099/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 35.4311ms
+2025-10-15 14:36:29.841 +07:00 [INF] Request starting HTTP/1.1 POST http://localhost:5099/api/Movie/Upload - multipart/form-data; boundary=----WebKitFormBoundaryAZFJfCrdoA83cFgm 5250614
+2025-10-15 14:36:29.861 +07:00 [INF] CORS policy execution successful.
+2025-10-15 14:36:29.920 +07:00 [INF] Executing endpoint 'Movie_API.Controllers.ImagesController.Upload (Movie_API)'
+2025-10-15 14:36:29.936 +07:00 [INF] Route matched with {action = "Upload", controller = "Images"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Upload(Movie_API.Models.DTO.ImageUploadRequestDTO) on controller Movie_API.Controllers.ImagesController (Movie_API).
+2025-10-15 14:36:30.216 +07:00 [INF] Executing action method Movie_API.Controllers.ImagesController.Upload (Movie_API) - Validation state: "Valid"
+2025-10-15 14:36:31.303 +07:00 [INF] Executed DbCommand (36ms) [Parameters=[@p0='?' (Size = 4000), @p1='?' (Size = 4000), @p2='?' (Size = 4000), @p3='?' (Size = 4000), @p4='?' (DbType = Int64), @p5='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Images] ([FileDescription], [FileExtension], [FileName], [FilePath], [FileSizeInBytes], [ThumbnailFileName])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5);
+2025-10-15 14:36:31.340 +07:00 [ERR] An exception occurred in the database while saving changes for context type 'Movie_API.Data.AppDbContext'.
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): Cannot insert the value NULL into column 'FilePath', table 'MovieWebAPI.dbo.Images'; column does not allow nulls. INSERT fails.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryHasMoreRows(Boolean& moreRows)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryReadInternal(Boolean setTimeout, Boolean& more)
+   at Microsoft.Data.SqlClient.SqlDataReader.Read()
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDataReader.Read()
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeResultSet(Int32 startCommandIndex, RelationalDataReader reader)
+ClientConnectionId:420eb018-1677-4c24-bda4-6d4f1fa1f3c0
+Error Number:515,State:2,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeResultSet(Int32 startCommandIndex, RelationalDataReader reader)
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.Consume(RelationalDataReader reader)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.SqlServer.Update.Internal.SqlServerModificationCommandBatch.Execute(IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.Execute(IEnumerable`1 commandBatches, IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChanges(IList`1 entries)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(IList`1 entriesToSave)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(StateManager stateManager, Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.<>c.<SaveChanges>b__112_0(DbContext _, ValueTuple`2 t)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges(Boolean acceptAllChangesOnSuccess)
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): Cannot insert the value NULL into column 'FilePath', table 'MovieWebAPI.dbo.Images'; column does not allow nulls. INSERT fails.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryHasMoreRows(Boolean& moreRows)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryReadInternal(Boolean setTimeout, Boolean& more)
+   at Microsoft.Data.SqlClient.SqlDataReader.Read()
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDataReader.Read()
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeResultSet(Int32 startCommandIndex, RelationalDataReader reader)
+ClientConnectionId:420eb018-1677-4c24-bda4-6d4f1fa1f3c0
+Error Number:515,State:2,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeResultSet(Int32 startCommandIndex, RelationalDataReader reader)
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.Consume(RelationalDataReader reader)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.SqlServer.Update.Internal.SqlServerModificationCommandBatch.Execute(IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.Execute(IEnumerable`1 commandBatches, IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChanges(IList`1 entries)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(IList`1 entriesToSave)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(StateManager stateManager, Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.<>c.<SaveChanges>b__112_0(DbContext _, ValueTuple`2 t)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges(Boolean acceptAllChangesOnSuccess)
+2025-10-15 14:36:31.381 +07:00 [INF] Executed action Movie_API.Controllers.ImagesController.Upload (Movie_API) in 1439.3402ms
+2025-10-15 14:36:31.383 +07:00 [INF] Executed endpoint 'Movie_API.Controllers.ImagesController.Upload (Movie_API)'
+2025-10-15 14:36:31.386 +07:00 [ERR] An unhandled exception has occurred while executing the request.
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): Cannot insert the value NULL into column 'FilePath', table 'MovieWebAPI.dbo.Images'; column does not allow nulls. INSERT fails.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryHasMoreRows(Boolean& moreRows)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryReadInternal(Boolean setTimeout, Boolean& more)
+   at Microsoft.Data.SqlClient.SqlDataReader.Read()
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDataReader.Read()
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeResultSet(Int32 startCommandIndex, RelationalDataReader reader)
+ClientConnectionId:420eb018-1677-4c24-bda4-6d4f1fa1f3c0
+Error Number:515,State:2,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeResultSet(Int32 startCommandIndex, RelationalDataReader reader)
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.Consume(RelationalDataReader reader)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.SqlServer.Update.Internal.SqlServerModificationCommandBatch.Execute(IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.Execute(IEnumerable`1 commandBatches, IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChanges(IList`1 entries)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(IList`1 entriesToSave)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(StateManager stateManager, Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.<>c.<SaveChanges>b__112_0(DbContext _, ValueTuple`2 t)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges()
+   at Movie_API.Repositories.LocalImageRepository.Upload(Image image) in I:\Movie_API\Movie_API\Repositories\LocalImageRepository.cs:line 23
+   at Movie_API.Controllers.ImagesController.Upload(ImageUploadRequestDTO request) in I:\Movie_API\Movie_API\Controllers\ImagesController.cs:line 65
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Logged|12_1(ControllerActionInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2025-10-15 14:36:31.406 +07:00 [INF] Request finished HTTP/1.1 POST http://localhost:5099/api/Movie/Upload - 500 null text/plain; charset=utf-8 1565.0089ms
+2025-10-15 14:38:58.547 +07:00 [INF] Executed DbCommand (11ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2025-10-15 14:38:58.591 +07:00 [INF] Executed DbCommand (10ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2025-10-15 14:38:58.593 +07:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2025-10-15 14:38:58.594 +07:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2025-10-15 14:38:58.608 +07:00 [INF] Executed DbCommand (6ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];
+2025-10-15 14:38:58.618 +07:00 [INF] No migrations were applied. The database is already up to date.
+2025-10-15 14:39:12.062 +07:00 [INF] User profile is available. Using 'C:\Users\Admin\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-10-15 14:39:12.251 +07:00 [INF] Now listening on: http://0.0.0.0:5099
+2025-10-15 14:39:12.307 +07:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-10-15 14:39:12.309 +07:00 [INF] Hosting environment: Development
+2025-10-15 14:39:12.310 +07:00 [INF] Content root path: I:\Movie_API\Movie_API
+2025-10-15 14:39:13.391 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5099/_framework/aspnetcore-browser-refresh.js - null null
+2025-10-15 14:39:13.405 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5099/_framework/aspnetcore-browser-refresh.js - 200 16503 application/javascript; charset=utf-8 18.0796ms
+2025-10-15 14:39:13.506 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5099/_vs/browserLink - null null
+2025-10-15 14:39:13.562 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5099/_vs/browserLink - 200 null text/javascript; charset=UTF-8 56.4046ms
+2025-10-15 14:39:14.306 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5099/swagger/v1/swagger.json - null null
+2025-10-15 14:39:14.342 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5099/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 36.36ms
+2025-10-15 14:39:42.591 +07:00 [INF] Request starting HTTP/1.1 POST http://localhost:5099/api/Movie/Upload - multipart/form-data; boundary=----WebKitFormBoundaryhlIBBrdHEWpuECAY 5250612
+2025-10-15 14:39:42.604 +07:00 [INF] CORS policy execution successful.
+2025-10-15 14:39:42.656 +07:00 [INF] Executing endpoint 'Movie_API.Controllers.ImagesController.Upload (Movie_API)'
+2025-10-15 14:39:42.672 +07:00 [INF] Route matched with {action = "Upload", controller = "Images"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Upload(Movie_API.Models.DTO.ImageUploadRequestDTO) on controller Movie_API.Controllers.ImagesController (Movie_API).
+2025-10-15 14:39:42.950 +07:00 [INF] Executing action method Movie_API.Controllers.ImagesController.Upload (Movie_API) - Validation state: "Valid"
+2025-10-15 14:39:44.070 +07:00 [INF] Executed DbCommand (38ms) [Parameters=[@p0='?' (Size = 4000), @p1='?' (Size = 4000), @p2='?' (Size = 4000), @p3='?' (Size = 4000), @p4='?' (DbType = Int64), @p5='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Images] ([FileDescription], [FileExtension], [FileName], [FilePath], [FileSizeInBytes], [ThumbnailFileName])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5);
+2025-10-15 14:39:44.107 +07:00 [INF] Executed action method Movie_API.Controllers.ImagesController.Upload (Movie_API), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 1149.9729ms.
+2025-10-15 14:39:44.114 +07:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType2`4[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-10-15 14:39:44.125 +07:00 [INF] Executed action Movie_API.Controllers.ImagesController.Upload (Movie_API) in 1445.1691ms
+2025-10-15 14:39:44.127 +07:00 [INF] Executed endpoint 'Movie_API.Controllers.ImagesController.Upload (Movie_API)'
+2025-10-15 14:39:44.135 +07:00 [INF] Request finished HTTP/1.1 POST http://localhost:5099/api/Movie/Upload - 200 null application/json; charset=utf-8 1544.3308ms
+2025-10-15 14:41:03.173 +07:00 [INF] Request starting HTTP/1.1 POST http://localhost:5099/api/Movie/13/thumbnail - multipart/form-data; boundary=----WebKitFormBoundaryJrLLOzDYXOiwr7QL 96489
+2025-10-15 14:41:03.225 +07:00 [INF] CORS policy execution successful.
+2025-10-15 14:41:03.227 +07:00 [INF] Executing endpoint 'Movie_API.Controllers.ImagesController.UploadThumbnail (Movie_API)'
+2025-10-15 14:41:03.231 +07:00 [INF] Route matched with {action = "UploadThumbnail", controller = "Images"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] UploadThumbnail(Int32, Movie_API.Models.DTO.ThumbnailUploadRequestDTO) on controller Movie_API.Controllers.ImagesController (Movie_API).
+2025-10-15 14:41:03.259 +07:00 [INF] Executing action method Movie_API.Controllers.ImagesController.UploadThumbnail (Movie_API) - Validation state: "Valid"
+2025-10-15 14:41:03.478 +07:00 [INF] Executed DbCommand (3ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [i].[Id], [i].[FileDescription], [i].[FileExtension], [i].[FileName], [i].[FilePath], [i].[FileSizeInBytes], [i].[ThumbnailFileName]
+FROM [Images] AS [i]
+WHERE [i].[Id] = @__id_0
+2025-10-15 14:41:03.497 +07:00 [INF] Executed DbCommand (2ms) [Parameters=[@p6='?' (DbType = Int32), @p0='?' (Size = 4000), @p1='?' (Size = 4000), @p2='?' (Size = 4000), @p3='?' (Size = 4000), @p4='?' (DbType = Int64), @p5='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Images] SET [FileDescription] = @p0, [FileExtension] = @p1, [FileName] = @p2, [FilePath] = @p3, [FileSizeInBytes] = @p4, [ThumbnailFileName] = @p5
+OUTPUT 1
+WHERE [Id] = @p6;
+2025-10-15 14:41:03.500 +07:00 [INF] Executed action method Movie_API.Controllers.ImagesController.UploadThumbnail (Movie_API), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 237.734ms.
+2025-10-15 14:41:03.501 +07:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType5`3[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-10-15 14:41:03.504 +07:00 [INF] Executed action Movie_API.Controllers.ImagesController.UploadThumbnail (Movie_API) in 271.1333ms
+2025-10-15 14:41:03.505 +07:00 [INF] Executed endpoint 'Movie_API.Controllers.ImagesController.UploadThumbnail (Movie_API)'
+2025-10-15 14:41:03.507 +07:00 [INF] Request finished HTTP/1.1 POST http://localhost:5099/api/Movie/13/thumbnail - 200 null application/json; charset=utf-8 333.5648ms
+2025-10-15 14:41:10.451 +07:00 [INF] Request starting HTTP/1.1 GET http://10.0.2.2:5099/api/Movies/get-all-movies?filterQuery=&sortBy=title&isAscending=true&pageNumber=1&pageSize=10 - null null
+2025-10-15 14:41:10.456 +07:00 [INF] Executing endpoint 'Movie_API.Controllers.MoviesController.GetAll (Movie_API)'
+2025-10-15 14:41:10.458 +07:00 [INF] Route matched with {action = "GetAll", controller = "Movies"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetAll(System.String, System.String, System.String, Boolean, Int32, Int32) on controller Movie_API.Controllers.MoviesController (Movie_API).
+2025-10-15 14:41:10.500 +07:00 [INF] Executing action method Movie_API.Controllers.MoviesController.GetAll (Movie_API) - Validation state: "Valid"
+2025-10-15 14:41:10.614 +07:00 [INF] Executed DbCommand (11ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[Title], [t].[Description], [t].[IsWatched], CASE
+    WHEN [t].[IsWatched] = CAST(1 AS bit) THEN [t].[DateWatched]
+    ELSE NULL
+END, CASE
+    WHEN [t].[IsWatched] = CAST(1 AS bit) THEN [t].[Rating]
+    ELSE NULL
+END, [t].[Genre], [t].[PosterUrl], [s].[Name], [s].[Id], [t0].[FullName], [t0].[Id], [t0].[Id0]
+FROM (
+    SELECT [m].[Id], [m].[DateWatched], [m].[Description], [m].[Genre], [m].[IsWatched], [m].[PosterUrl], [m].[Rating], [m].[StudioID], [m].[Title]
+    FROM [Movies] AS [m]
+    ORDER BY [m].[Title]
+    OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+) AS [t]
+INNER JOIN [Studios] AS [s] ON [t].[StudioID] = [s].[Id]
+LEFT JOIN (
+    SELECT [a].[FullName], [m0].[Id], [a].[Id] AS [Id0], [m0].[MovieId]
+    FROM [Movie_Actors] AS [m0]
+    INNER JOIN [Actors] AS [a] ON [m0].[ActorId] = [a].[Id]
+) AS [t0] ON [t].[Id] = [t0].[MovieId]
+ORDER BY [t].[Title], [t].[Id], [s].[Id], [t0].[Id]
+2025-10-15 14:41:10.621 +07:00 [INF] Executed action method Movie_API.Controllers.MoviesController.GetAll (Movie_API), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 118.5561ms.
+2025-10-15 14:41:10.623 +07:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[Movie_API.Models.DTO.MovieWithActorAndStudioDTO, Movie_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-10-15 14:41:10.637 +07:00 [INF] Executed action Movie_API.Controllers.MoviesController.GetAll (Movie_API) in 177.317ms
+2025-10-15 14:41:10.638 +07:00 [INF] Executed endpoint 'Movie_API.Controllers.MoviesController.GetAll (Movie_API)'
+2025-10-15 14:41:10.640 +07:00 [INF] Request finished HTTP/1.1 GET http://10.0.2.2:5099/api/Movies/get-all-movies?filterQuery=&sortBy=title&isAscending=true&pageNumber=1&pageSize=10 - 200 null application/json; charset=utf-8 189.3148ms
+2025-10-15 14:41:11.538 +07:00 [INF] Request starting HTTP/1.1 GET http://10.0.2.2:5099/api/Movie/GetAllImages - null null
+2025-10-15 14:41:11.542 +07:00 [INF] Executing endpoint 'Movie_API.Controllers.ImagesController.GetInfoAllImages (Movie_API)'
+2025-10-15 14:41:11.546 +07:00 [INF] Route matched with {action = "GetInfoAllImages", controller = "Images"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetInfoAllImages() on controller Movie_API.Controllers.ImagesController (Movie_API).
+2025-10-15 14:41:11.563 +07:00 [INF] Executing action method Movie_API.Controllers.ImagesController.GetInfoAllImages (Movie_API) - Validation state: "Valid"
+2025-10-15 14:41:11.565 +07:00 [INF] Executed action method Movie_API.Controllers.ImagesController.GetInfoAllImages (Movie_API), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 0.6851ms.
+2025-10-15 14:41:11.567 +07:00 [INF] Executing OkObjectResult, writing value of type 'System.Linq.Enumerable+SelectEnumerableIterator`2[[Movie_API.Models.Domain.Image, Movie_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[<>f__AnonymousType3`7[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int64, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], Movie_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-10-15 14:41:11.577 +07:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[FileDescription], [i].[FileExtension], [i].[FileName], [i].[FilePath], [i].[FileSizeInBytes], [i].[ThumbnailFileName]
+FROM [Images] AS [i]
+2025-10-15 14:41:11.581 +07:00 [INF] Executed action Movie_API.Controllers.ImagesController.GetInfoAllImages (Movie_API) in 33.9053ms
+2025-10-15 14:41:11.582 +07:00 [INF] Executed endpoint 'Movie_API.Controllers.ImagesController.GetInfoAllImages (Movie_API)'
+2025-10-15 14:41:11.583 +07:00 [INF] Request finished HTTP/1.1 GET http://10.0.2.2:5099/api/Movie/GetAllImages - 200 null application/json; charset=utf-8 45.5281ms
+2025-10-15 14:41:11.672 +07:00 [INF] Request starting HTTP/1.1 GET http://10.0.2.2:5099/uploads/doggy_cc53776a-5d49-4155-b698-82a004f83a44.jpg - null null
+2025-10-15 14:41:11.674 +07:00 [INF] Executing endpoint 'HTTP: GET, HEAD /uploads/{*path}'
+2025-10-15 14:41:11.682 +07:00 [INF] Sending file with download name ''.
+2025-10-15 14:41:11.689 +07:00 [INF] Executed endpoint 'HTTP: GET, HEAD /uploads/{*path}'
+2025-10-15 14:41:11.690 +07:00 [INF] Request finished HTTP/1.1 GET http://10.0.2.2:5099/uploads/doggy_cc53776a-5d49-4155-b698-82a004f83a44.jpg - 200 96306 image/jpeg 18.3829ms
+2025-10-15 14:41:13.062 +07:00 [INF] Request starting HTTP/1.1 GET http://10.0.2.2:5099/uploads/cd0fc26a-6857-449b-934c-3a0123a75e81.mp4 - null null
+2025-10-15 14:41:13.065 +07:00 [INF] Executing endpoint 'HTTP: GET, HEAD /uploads/{*path}'
+2025-10-15 14:41:13.066 +07:00 [INF] Sending file with download name ''.
+2025-10-15 14:41:14.227 +07:00 [INF] Executed endpoint 'HTTP: GET, HEAD /uploads/{*path}'
+2025-10-15 14:41:14.228 +07:00 [INF] Request finished HTTP/1.1 GET http://10.0.2.2:5099/uploads/cd0fc26a-6857-449b-934c-3a0123a75e81.mp4 - 200 5250194 video/mp4 1166.3388ms
+2025-10-15 14:41:37.922 +07:00 [INF] User profile is available. Using 'C:\Users\Admin\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-10-15 14:41:38.093 +07:00 [INF] Now listening on: http://0.0.0.0:5099
+2025-10-15 14:41:38.143 +07:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-10-15 14:41:38.145 +07:00 [INF] Hosting environment: Development
+2025-10-15 14:41:38.146 +07:00 [INF] Content root path: I:\Movie_API\Movie_API
+2025-10-15 14:41:38.889 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5099/_framework/aspnetcore-browser-refresh.js - null null
+2025-10-15 14:41:38.904 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5099/_framework/aspnetcore-browser-refresh.js - 200 16503 application/javascript; charset=utf-8 18.4134ms
+2025-10-15 14:41:39.029 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5099/_vs/browserLink - null null
+2025-10-15 14:41:39.088 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5099/_vs/browserLink - 200 null text/javascript; charset=UTF-8 58.7447ms
+2025-10-15 14:41:39.842 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5099/swagger/v1/swagger.json - null null
+2025-10-15 14:41:39.880 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5099/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 37.9556ms
+2025-10-15 14:42:07.058 +07:00 [INF] Request starting HTTP/1.1 GET http://10.0.2.2:5099/api/Movies/get-all-movies?filterQuery=&sortBy=title&isAscending=true&pageNumber=1&pageSize=10 - null null
+2025-10-15 14:42:07.151 +07:00 [INF] Executing endpoint 'Movie_API.Controllers.MoviesController.GetAll (Movie_API)'
+2025-10-15 14:42:07.164 +07:00 [INF] Route matched with {action = "GetAll", controller = "Movies"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetAll(System.String, System.String, System.String, Boolean, Int32, Int32) on controller Movie_API.Controllers.MoviesController (Movie_API).
+2025-10-15 14:42:07.330 +07:00 [INF] Executing action method Movie_API.Controllers.MoviesController.GetAll (Movie_API) - Validation state: "Valid"
+2025-10-15 14:42:08.379 +07:00 [INF] Executed DbCommand (41ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[Title], [t].[Description], [t].[IsWatched], CASE
+    WHEN [t].[IsWatched] = CAST(1 AS bit) THEN [t].[DateWatched]
+    ELSE NULL
+END, CASE
+    WHEN [t].[IsWatched] = CAST(1 AS bit) THEN [t].[Rating]
+    ELSE NULL
+END, [t].[Genre], [t].[PosterUrl], [s].[Name], [s].[Id], [t0].[FullName], [t0].[Id], [t0].[Id0]
+FROM (
+    SELECT [m].[Id], [m].[DateWatched], [m].[Description], [m].[Genre], [m].[IsWatched], [m].[PosterUrl], [m].[Rating], [m].[StudioID], [m].[Title]
+    FROM [Movies] AS [m]
+    ORDER BY [m].[Title]
+    OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+) AS [t]
+INNER JOIN [Studios] AS [s] ON [t].[StudioID] = [s].[Id]
+LEFT JOIN (
+    SELECT [a].[FullName], [m0].[Id], [a].[Id] AS [Id0], [m0].[MovieId]
+    FROM [Movie_Actors] AS [m0]
+    INNER JOIN [Actors] AS [a] ON [m0].[ActorId] = [a].[Id]
+) AS [t0] ON [t].[Id] = [t0].[MovieId]
+ORDER BY [t].[Title], [t].[Id], [s].[Id], [t0].[Id]
+2025-10-15 14:42:08.408 +07:00 [INF] Executed action method Movie_API.Controllers.MoviesController.GetAll (Movie_API), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 1073.1525ms.
+2025-10-15 14:42:08.416 +07:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[Movie_API.Models.DTO.MovieWithActorAndStudioDTO, Movie_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-10-15 14:42:08.438 +07:00 [INF] Executed action Movie_API.Controllers.MoviesController.GetAll (Movie_API) in 1269.5098ms
+2025-10-15 14:42:08.439 +07:00 [INF] Executed endpoint 'Movie_API.Controllers.MoviesController.GetAll (Movie_API)'
+2025-10-15 14:42:08.447 +07:00 [INF] Request finished HTTP/1.1 GET http://10.0.2.2:5099/api/Movies/get-all-movies?filterQuery=&sortBy=title&isAscending=true&pageNumber=1&pageSize=10 - 200 null application/json; charset=utf-8 1389.1589ms
+2025-10-15 14:42:09.326 +07:00 [INF] Request starting HTTP/1.1 GET http://10.0.2.2:5099/api/Movie/GetAllImages - null null
+2025-10-15 14:42:09.333 +07:00 [INF] Executing endpoint 'Movie_API.Controllers.ImagesController.GetInfoAllImages (Movie_API)'
+2025-10-15 14:42:09.338 +07:00 [INF] Route matched with {action = "GetInfoAllImages", controller = "Images"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetInfoAllImages() on controller Movie_API.Controllers.ImagesController (Movie_API).
+2025-10-15 14:42:09.357 +07:00 [INF] Executing action method Movie_API.Controllers.ImagesController.GetInfoAllImages (Movie_API) - Validation state: "Valid"
+2025-10-15 14:42:09.360 +07:00 [INF] Executed action method Movie_API.Controllers.ImagesController.GetInfoAllImages (Movie_API), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 0.9798ms.
+2025-10-15 14:42:09.362 +07:00 [INF] Executing OkObjectResult, writing value of type 'System.Linq.Enumerable+SelectEnumerableIterator`2[[Movie_API.Models.Domain.Image, Movie_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[<>f__AnonymousType3`7[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int64, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], Movie_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-10-15 14:42:09.413 +07:00 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[FileDescription], [i].[FileExtension], [i].[FileName], [i].[FilePath], [i].[FileSizeInBytes], [i].[ThumbnailFileName]
+FROM [Images] AS [i]
+2025-10-15 14:42:09.451 +07:00 [INF] Executed action Movie_API.Controllers.ImagesController.GetInfoAllImages (Movie_API) in 110.3232ms
+2025-10-15 14:42:09.453 +07:00 [INF] Executed endpoint 'Movie_API.Controllers.ImagesController.GetInfoAllImages (Movie_API)'
+2025-10-15 14:42:09.454 +07:00 [INF] Request finished HTTP/1.1 GET http://10.0.2.2:5099/api/Movie/GetAllImages - 200 null application/json; charset=utf-8 127.5306ms
+2025-10-15 14:42:52.239 +07:00 [INF] Request starting HTTP/1.1 GET http://10.0.2.2:5099/api/Movie/GetAllImages - null null
+2025-10-15 14:42:52.251 +07:00 [INF] Executing endpoint 'Movie_API.Controllers.ImagesController.GetInfoAllImages (Movie_API)'
+2025-10-15 14:42:52.252 +07:00 [INF] Route matched with {action = "GetInfoAllImages", controller = "Images"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetInfoAllImages() on controller Movie_API.Controllers.ImagesController (Movie_API).
+2025-10-15 14:42:52.280 +07:00 [INF] Executing action method Movie_API.Controllers.ImagesController.GetInfoAllImages (Movie_API) - Validation state: "Valid"
+2025-10-15 14:42:52.282 +07:00 [INF] Executed action method Movie_API.Controllers.ImagesController.GetInfoAllImages (Movie_API), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 0.1099ms.
+2025-10-15 14:42:52.284 +07:00 [INF] Executing OkObjectResult, writing value of type 'System.Linq.Enumerable+SelectEnumerableIterator`2[[Movie_API.Models.Domain.Image, Movie_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[<>f__AnonymousType3`7[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int64, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], Movie_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-10-15 14:42:52.335 +07:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[FileDescription], [i].[FileExtension], [i].[FileName], [i].[FilePath], [i].[FileSizeInBytes], [i].[ThumbnailFileName]
+FROM [Images] AS [i]
+2025-10-15 14:42:52.338 +07:00 [INF] Executed action Movie_API.Controllers.ImagesController.GetInfoAllImages (Movie_API) in 83.5666ms
+2025-10-15 14:42:52.339 +07:00 [INF] Executed endpoint 'Movie_API.Controllers.ImagesController.GetInfoAllImages (Movie_API)'
+2025-10-15 14:42:52.340 +07:00 [INF] Request finished HTTP/1.1 GET http://10.0.2.2:5099/api/Movie/GetAllImages - 200 null application/json; charset=utf-8 100.798ms

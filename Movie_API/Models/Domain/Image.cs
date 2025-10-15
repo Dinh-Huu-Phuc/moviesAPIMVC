@@ -18,6 +18,9 @@ namespace Movie_API.Models.Domain
 
         public long FileSizeInBytes { get; set; }
 
-        public string FilePath { get; set; } =  default!;
+        // public string FilePath { get; set; }  // Dòng cũ
+        public string? FilePath { get; set; } // Dòng mới
+
+        public string? ThumbnailFileName { get; set; }
     }
 }

@@ -96,11 +96,19 @@ builder.Services.AddScoped<IImageRepository, LocalImageRepository>();
 builder.Services.AddScoped<ValidateStudioExistsAttribute>();
 builder.Services.AddScoped<ValidateActorCanDeleteAttribute>();
 builder.Services.AddScoped<ValidateMovieActorNotExistsAttribute>();
+builder.Services.AddScoped<Movie_API.Services.IThumbnailService, Movie_API.Services.ThumbnailService>();
 
 // ===== Swagger =====
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
 {
+    // ✅ THÊM DÒNG NÀY: để Swagger hiểu input là file khi dùng IFormFile
+    options.MapType<IFormFile>(() => new OpenApiSchema
+    {
+        Type = "string",
+        Format = "binary"
+    });
+
     options.SwaggerDoc("v1", new OpenApiInfo { Title = "Movie API", Version = "v1" });
     options.AddServer(new OpenApiServer { Url = "http://localhost:5099" });
     options.AddServer(new OpenApiServer { Url = "https://localhost:7138" });
@@ -120,7 +128,7 @@ builder.Services.AddSwaggerGen(options =>
                 Reference = new OpenApiReference
                 {
                     Type = ReferenceType.SecurityScheme,
-                    Id = JwtBearerDefaults.AuthenticationScheme
+                    Id   = JwtBearerDefaults.AuthenticationScheme
                 },
                 Scheme = "Oauth2",
                 Name   = JwtBearerDefaults.AuthenticationScheme,
@@ -189,14 +197,14 @@ app.UseStaticFiles(new StaticFileOptions
     }
 });
 
-// 4) Endpoint debug để xem thư mục uploads hiện có file gì
-//app.MapGet("/api/debug/uploads", () =>
-//{
-//    var dir = Path.Combine(builder.Environment.ContentRootPath, "uploads");
-//    Directory.CreateDirectory(dir);
-//    var files = Directory.GetFiles(dir).Select(Path.GetFileName).ToList();
-//    return Results.Ok(new { dir, exists = Directory.Exists(dir), files });
-//});
+// (nếu cần debug uploads, bạn có thể mở lại endpoint này)
+// app.MapGet("/api/debug/uploads", () =>
+// {
+//     var dir = Path.Combine(builder.Environment.ContentRootPath, "uploads");
+//     Directory.CreateDirectory(dir);
+//     var files = Directory.GetFiles(dir).Select(Path.GetFileName).ToList();
+//     return Results.Ok(new { dir, exists = Directory.Exists(dir), files });
+// });
 
 app.MapControllers();
 app.Run();
