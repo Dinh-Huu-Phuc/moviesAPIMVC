@@ -59,14 +59,28 @@ namespace Movie_API.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FilePath")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<long>("FileSizeInBytes")
                         .HasColumnType("bigint");
 
+                    b.Property<string>("Genre")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Intro")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("MovieId")
+                        .HasColumnType("int");
+
                     b.Property<string>("ThumbnailFileName")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("Year")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 

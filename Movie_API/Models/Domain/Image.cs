@@ -18,9 +18,15 @@ namespace Movie_API.Models.Domain
 
         public long FileSizeInBytes { get; set; }
 
-        // public string FilePath { get; set; }  // Dòng cũ
-        public string? FilePath { get; set; } // Dòng mới
+        
+        public string? FilePath { get; set; } 
 
         public string? ThumbnailFileName { get; set; }
+
+        public string? Title { get; set; }
+        public string? Intro { get; set; }
+        public string? Genre { get; set; } // Sửa lại từ "Genrne"
+        public int? Year { get; set; }
+        public int? MovieId { get; set; }
     }
 }
