@@ -17,5 +17,7 @@ namespace Movie_API.Repositories
         void Update(Image image);
 
         bool Delete(int id);
+
+
     }
 }
